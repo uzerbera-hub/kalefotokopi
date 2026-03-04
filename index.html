@@ -26,41 +26,42 @@
         .search-container input { border: none !important; box-shadow: none !important; margin-bottom: 0 !important; color: var(--text-color) !important; }
         
         /* KPSS Sayaçları */
-        .countdown-container { background: var(--card-bg); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; margin-top: 15px; }
-        .countdown-card { text-align: center; padding: 15px 10px; background: #f1f8ff; border-radius: 12px; margin-bottom: 10px; border: 1px solid #d0e8ff; transition: 0.3s; }
+        .countdown-container { background: var(--card-bg); padding: 15px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; margin-top: 15px; }
+        .countdown-card { text-align: center; padding: 10px; background: #f1f8ff; border-radius: 12px; margin-bottom: 10px; border: 1px solid #d0e8ff; transition: 0.3s; }
         body.dark-mode .countdown-card { background: #1a237e; border-color: #283593; }
-        .exam-name { font-weight: 700; color: #1565c0; font-size: 1.1rem; margin-bottom: 2px; }
+        .exam-name { font-weight: 700; color: #1565c0; font-size: 1rem; }
         body.dark-mode .exam-name { color: #bbdefb; }
-        .exam-date { font-size: 0.8rem; color: #757575; margin-bottom: 10px; font-weight: 500;}
+        .exam-date { font-size: 0.75rem; color: #757575; margin-bottom: 5px; }
         body.dark-mode .exam-date { color: #90a4ae; }
-        .timer { display: flex; justify-content: center; gap: 6px; }
-        .time-box { background: #1565c0; color: white; padding: 6px; border-radius: 8px; min-width: 50px; display: flex; flex-direction: column; align-items: center; }
-        .time-box span { font-weight: 700; font-size: 1.3rem; line-height: 1; }
-        .time-box small { font-size: 0.6rem; opacity: 0.8; text-transform: uppercase; margin-top: 2px; }
+        .timer { display: flex; justify-content: center; gap: 5px; }
+        .time-box { background: #1565c0; color: white; padding: 4px; border-radius: 6px; min-width: 42px; display: flex; flex-direction: column; align-items: center; }
+        .time-box span { font-weight: 700; font-size: 1.1rem; line-height: 1; }
+        .time-box small { font-size: 0.55rem; opacity: 0.8; text-transform: uppercase; }
 
-        /* Filtreler & Ürün Kartları */
-        .filter-section { background: var(--card-bg); padding: 15px 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; }
-        .chip.filter-chip { cursor: pointer; transition: 0.3s; background-color: #e3f2fd; color: #1565c0; font-weight: 500; }
-        .chip.filter-chip.active { background-color: #1565c0; color: white; }
-        
+        /* Ürün Kartları */
         .product-card { background-color: var(--card-bg); border-radius: 15px; overflow: hidden; transition: 0.3s; border: none; height: 100%; display: flex; flex-direction: column; }
         .card-image { background: #e0e0e0; height: 260px; display: flex; align-items: center; justify-content: center; position: relative;}
         .card-image img { max-height: 230px; width: auto; max-width: 90%; object-fit: contain; }
         
         .badge-kategori { position: absolute; top: 12px; left: 12px; background: #ff9800; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; z-index: 10;}
-        .price-tag { font-size: 1.9rem; font-weight: 700; color: #4caf50; margin: 10px 0; }
+        .badge-yeni { position: absolute; top: 12px; right: 12px; background: #e53935; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; z-index: 10; animation: pulse-new 2s infinite; }
+        @keyframes pulse-new { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        
+        .price-tag { font-size: 1.8rem; font-weight: 700; color: #4caf50; margin: 10px 0; }
         .add-to-cart-btn { width: 100%; border-radius: 25px; font-weight: 600; height: 45px; background: linear-gradient(45deg, #1565c0, #1976d2); }
         
-        /* Yüzen Butonlar */
         #floating-cart-container { position: fixed; bottom: 30px; right: 30px; z-index: 990; }
         #floating-cart-btn { width: 65px; height: 65px; background-color: #d32f2f !important; }
         .cart-badge { position: absolute; top: -5px; right: -5px; background-color: #4caf50; color: white; border-radius: 50%; padding: 4px 10px; font-weight: bold; border: 2px solid white; z-index: 1000; }
         
+        /* BİLGİLENDİRME EKRANI (ESKİ NET TARZ) */
+        #info-modal { border-radius: 15px; width: 90% !important; max-width: 600px; }
+        #info-modal h4 { font-weight: bold; color: #1565c0; border-bottom: 2px solid #e3f2fd; padding-bottom: 10px; }
+        #info-modal ol li { margin-bottom: 12px; font-size: 1.1rem; color: #424242; font-weight: 500; }
+        
         @media only screen and (max-width: 600px) {
             .brand-logo { font-size: 1.3rem !important; }
-            .time-box { min-width: 42px; padding: 4px; }
-            .time-box span { font-size: 1.1rem; }
-            .exam-name { font-size: 0.95rem; }
+            .time-box { min-width: 38px; }
         }
     </style>
 </head>
@@ -83,19 +84,17 @@
                     <div class="search-container d-flex align-items-center">
                         <div class="input-field" style="margin: 0; width:100%;">
                             <i class="material-icons prefix" style="color: #1565c0;">search</i>
-                            <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Kitap, marka veya kod ara...">
+                            <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Kitap veya marka ara...">
                         </div>
                     </div>
                 </div>
                 <div class="col s12 m4" style="margin-top: 5px;">
-                    <div class="input-field" style="background: var(--card-bg); border-radius: 30px; padding: 0 15px;">
-                        <select id="sortSelect" onchange="filterProducts()" style="border:none;">
-                            <option value="default" selected>Sıralama Seçiniz</option>
-                            <option value="priceAsc">Fiyat: Artan</option>
-                            <option value="priceDesc">Fiyat: Azalan</option>
-                            <option value="nameAsc">A'dan Z'ye</option>
-                        </select>
-                    </div>
+                    <select id="sortSelect" onchange="filterProducts()" style="display: block; border-radius: 30px; border: 1px solid #ddd; padding: 5px 10px; height: 45px; background: var(--card-bg); color: var(--text-color);">
+                        <option value="default">Sıralama Seçiniz</option>
+                        <option value="priceAsc">Fiyat: Düşükten Yükseğe</option>
+                        <option value="priceDesc">Fiyat: Yüksekten Düşüğe</option>
+                        <option value="nameAsc">Ad: A'dan Z'ye</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -104,42 +103,39 @@
     <main class="container">
         
         <div class="countdown-container">
-            <div class="center-align" style="margin-bottom: 15px;">
-                <span style="font-weight: 600; color: #1565c0; font-size: 1.1rem;"><i class="material-icons" style="vertical-align: middle;">event</i> 2026 KPSS SINAV TAKVİMİ</span>
-            </div>
             <div class="row" style="margin-bottom: 0;">
                 <div class="col s12 m4">
                     <div class="countdown-card">
-                        <div class="exam-name">Lisans</div>
+                        <div class="exam-name">KPSS Lisans</div>
                         <div class="exam-date">6 Eylül 2026</div>
                         <div class="timer">
                             <div class="time-box"><span id="l-d">00</span><small>Gün</small></div>
-                            <div class="time-box"><span id="l-h">00</span><small>Saat</small></div>
-                            <div class="time-box"><span id="l-m">00</span><small>Dak</small></div>
+                            <div class="time-box"><span id="l-h">00</span><small>Sa</small></div>
+                            <div class="time-box"><span id="l-m">00</span><small>Dk</small></div>
                             <div class="time-box"><span id="l-s">00</span><small>Sn</small></div>
                         </div>
                     </div>
                 </div>
                 <div class="col s12 m4">
                     <div class="countdown-card">
-                        <div class="exam-name">Ön Lisans</div>
+                        <div class="exam-name">KPSS Ön Lisans</div>
                         <div class="exam-date">4 Ekim 2026</div>
                         <div class="timer">
                             <div class="time-box"><span id="o-d">00</span><small>Gün</small></div>
-                            <div class="time-box"><span id="o-h">00</span><small>Saat</small></div>
-                            <div class="time-box"><span id="o-m">00</span><small>Dak</small></div>
+                            <div class="time-box"><span id="o-h">00</span><small>Sa</small></div>
+                            <div class="time-box"><span id="o-m">00</span><small>Dk</small></div>
                             <div class="time-box"><span id="o-s">00</span><small>Sn</small></div>
                         </div>
                     </div>
                 </div>
                 <div class="col s12 m4">
                     <div class="countdown-card">
-                        <div class="exam-name">Ortaöğretim</div>
+                        <div class="exam-name">KPSS Ortaöğretim</div>
                         <div class="exam-date">25 Ekim 2026</div>
                         <div class="timer">
                             <div class="time-box"><span id="or-d">00</span><small>Gün</small></div>
-                            <div class="time-box"><span id="or-h">00</span><small>Saat</small></div>
-                            <div class="time-box"><span id="or-m">00</span><small>Dak</small></div>
+                            <div class="time-box"><span id="or-h">00</span><small>Sa</small></div>
+                            <div class="time-box"><span id="or-m">00</span><small>Dk</small></div>
                             <div class="time-box"><span id="or-s">00</span><small>Sn</small></div>
                         </div>
                     </div>
@@ -149,7 +145,7 @@
 
         <div class="center-align" style="margin-bottom: 20px;">
             <a href="#request-modal" class="modal-trigger btn-large orange darken-3" style="border-radius: 30px; font-weight: bold; width: 100%; max-width: 500px;">
-                <i class="material-icons left">menu_book</i>Katalogda Olmayan Kitabı İste
+                <i class="material-icons left">menu_book</i>BULAMADIĞINIZ KİTAPLARI BURADAN İSTEYİN
             </a>
         </div>
 
@@ -165,19 +161,14 @@
             </div>
         </div>
 
-        <div class="row" id="product-list">
-            <div class="center-align" style="margin-top: 50px;">
-                <div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>
-            </div>
-        </div>
+        <div class="row" id="product-list"></div>
     </main>
 
     <footer class="page-footer blue-grey darken-4">
         <div class="container center-align">
             <h5 class="white-text">Kale Fotokopi</h5>
-            <p>0531 379 35 27 | Çanakkale Merkez</p>
-            <img src="https://profile-counter.glitch.me/kalefotokopi_sayac/count.svg" alt="Ziyaretçi">
-            <div class="footer-copyright" style="margin-top: 20px;">
+            <p>+90 531 379 35 27 | Çanakkale</p>
+            <div class="footer-copyright">
                 <a href="#!" onclick="checkAdminPassword()" class="grey-text">Yönetici Girişi</a>
             </div>
         </div>
@@ -188,13 +179,54 @@
         <a class="btn-floating btn-large red pulse" id="floating-cart-btn"><i class="material-icons">shopping_cart</i></a>
     </div>
 
-    <div id="info-modal" class="modal"><div class="modal-content"><h5>BİLGİLENDİRME</h5><ol><li>Minimum sipariş 400 ₺'dir.</li><li>Spiral +20 ₺'dir.</li><li>Dikey basım x2 fiyattır.</li></ol></div><div class="modal-footer"><a href="#!" class="modal-close btn green">ANLADIM</a></div></div>
-    
-    <div id="cart-modal" class="modal bottom-sheet"><div class="modal-content"><h4>Sepetim</h4><div id="cart-items"></div><h4 class="right-align">Toplam: <span id="cart-total">0.00</span> ₺</h4><div id="min-order-warning" class="red-text right-align"></div></div><div class="modal-footer"><button class="btn green" onclick="sendOrder('whatsapp')">WhatsApp Sipariş</button></div></div>
+    <div id="info-modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>GENEL BİLGİLENDİRME</h4>
+            <ol>
+                <li>KİTAPLARIN FİYATLARI SAYFADA İKİLİ ZIMBALI FİYATLARIDIR.</li>
+                <li>İSTEĞE GÖRE SPİRAL YAPILIR, ÜCRETİ 20 ₺'DİR.</li>
+                <li>İSTEĞE GÖRE TAMBOY DİKEY ÇIKARILABİLİR, O ZAMAN FİYAT LİSTE FİYATININ İKİ KATI ŞEKLİNDE OLACAKTIR.</li>
+                <li>SİSTEM ÜZERİNDEN MİNİMUM SİPARİŞ TUTARI 400 ₺'DİR.</li>
+                <li>YANLIŞ YAZILAN KODLAR BİZİM SORUMLULUĞUMUZDA DEĞİLDİR.</li>
+                <li>SİLİK BASKI VEYA YANLIŞ KİTAP DURUMUNDA İADEMİZ MEVCUTTUR.</li>
+            </ol>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close btn-large green darken-2" style="width:100%; border-radius:30px; font-weight:bold;">ANLADIM, SİTEYE GİR</a>
+        </div>
+    </div>
 
-    <div id="request-modal" class="modal"><div class="modal-content"><h4>Kitap İsteği</h4><input type="text" id="requested-book-name" placeholder="Kitap Adı Yazın..."></div><div class="modal-footer"><button class="btn green" onclick="sendBookRequest()">WhatsApp'tan Sor</button></div></div>
+    <div id="cart-modal" class="modal bottom-sheet">
+        <div class="modal-content">
+            <h4>Sepetim</h4>
+            <div id="cart-items"></div>
+            <h4 class="right-align">Toplam: <span id="cart-total">0.00</span> ₺</h4>
+            <div id="min-order-warning" class="red-text right-align" style="font-weight:bold;"></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-large green" onclick="sendOrder('whatsapp')" style="width:100%; border-radius:30px;">WhatsApp Sipariş Ver</button>
+        </div>
+    </div>
 
-    <div id="admin-modal" class="modal modal-fixed-footer"><div class="modal-content"><h4>Admin Paneli</h4><button class="btn green" onclick="adminAddNewRow()">Yeni Ürün</button><table><thead><tr><th>Kod</th><th>Ad</th><th>Fiyat</th><th>Görsel Link</th><th>İşlem</th></tr></thead><tbody id="admin-table-body"></tbody></table></div><div class="modal-footer"><button class="btn blue" onclick="saveAndDownloadCSV()">CSV İndir</button></div></div>
+    <div id="request-modal" class="modal">
+        <div class="modal-content">
+            <h4>Kitap İsteği</h4>
+            <p>Katalogda olmayan kitabın adını ve yayınevini yazın.</p>
+            <input type="text" id="requested-book-name" placeholder="Örn: Benim Hocam Coğrafya 2026">
+        </div>
+        <div class="modal-footer">
+            <button class="btn green" onclick="sendBookRequest()">WhatsApp'tan Sor</button>
+        </div>
+    </div>
+
+    <div id="admin-modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Admin Paneli</h4>
+            <button class="btn green" onclick="adminAddNewRow()">Yeni Ürün</button>
+            <table class="striped"><thead><tr><th>Kod</th><th>Ad</th><th>Fiyat</th><th>Görsel</th><th>İşlem</th></tr></thead><tbody id="admin-table-body"></tbody></table>
+        </div>
+        <div class="modal-footer"><button class="btn blue" onclick="saveAndDownloadCSV()">Kaydet ve CSV İndir</button></div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -202,7 +234,7 @@
     <script>
         const WHATSAPP_NUMBER = "905313793527";
         const ADMIN_PASSWORD = "1234";
-        const NO_IMAGE_URL = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22400%22%20height%3D%22550%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22400%22%20height%3D%22550%22%20fill%3D%22%23eeeeee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2230%22%20fill%3D%22%23757575%22%3EGÖRSEL%20HAZIRLANIYOR%3C%2Ftext%3E%3C%2Fsvg%3E";
+        const NO_IMAGE_URL = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22400%22%20height%3D%22550%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%22400%22%20height%3D%22550%22%20fill%3D%22%23eeeeee%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2245%25%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22bold%22%20fill%3D%22%23ff9800%22%3EGÖRSEL%3C%2Ftext%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2255%25%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2230%22%20font-weight%3D%22bold%22%20fill%3D%22%23757575%22%3EHAZIRLANIYOR%3C%2Ftext%3E%3C%2Fsvg%3E";
 
         const examDates = {
             lisans: new Date("September 6, 2026 10:15:00").getTime(),
@@ -215,35 +247,29 @@
         let cart = [];
 
         document.addEventListener('DOMContentLoaded', function() {
-            M.Modal.init(document.querySelectorAll('.modal'));
-            M.FormSelect.init(document.querySelectorAll('select'));
+            M.Modal.init(document.querySelectorAll('.modal'), { dismissible: false });
             M.Modal.getInstance(document.getElementById('info-modal')).open();
             
             checkTheme();
             loadCartFromMemory();
             loadCatalog();
-            startCountdowns();
+            setInterval(updateAllTimers, 1000);
         });
 
-        // SAYAÇ FONKSİYONU
-        function startCountdowns() {
-            function update() {
-                const now = new Date().getTime();
-                updateTimer('lisans', 'l', examDates.lisans, now);
-                updateTimer('onlisans', 'o', examDates.onlisans, now);
-                updateTimer('ortaogretim', 'or', examDates.ortaogretim, now);
-            }
-            update();
-            setInterval(update, 1000);
+        function updateAllTimers() {
+            const now = new Date().getTime();
+            updateTimer('l', examDates.lisans, now);
+            updateTimer('o', examDates.onlisans, now);
+            updateTimer('or', examDates.ortaogretim, now);
         }
 
-        function updateTimer(key, prefix, target, now) {
+        function updateTimer(prefix, target, now) {
             const dist = target - now;
             if (dist < 0) return;
-            document.getElementById(`${prefix}-d`).innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
-            document.getElementById(`${prefix}-h`).innerText = Math.floor((dist % (86400000)) / 3600000);
-            document.getElementById(`${prefix}-m`).innerText = Math.floor((dist % 3600000) / 60000);
-            document.getElementById(`${prefix}-s`).innerText = Math.floor((dist % 60000) / 1000);
+            document.getElementById(`${prefix}-d`).innerText = Math.floor(dist / 86400000);
+            document.getElementById(`${prefix}-h`).innerText = Math.floor((dist % 86400000) / 3600000).toString().padStart(2, '0');
+            document.getElementById(`${prefix}-m`).innerText = Math.floor((dist % 3600000) / 60000).toString().padStart(2, '0');
+            document.getElementById(`${prefix}-s`).innerText = Math.floor((dist % 60000) / 1000).toString().padStart(2, '0');
         }
 
         function toggleTheme() {
@@ -290,6 +316,7 @@
             });
             if(sort==='priceAsc') filtered.sort((a,b) => parsePrice(a.fiyat) - parsePrice(b.fiyat));
             if(sort==='priceDesc') filtered.sort((a,b) => parsePrice(b.fiyat) - parsePrice(a.fiyat));
+            if(sort==='nameAsc') filtered.sort((a,b) => a.ad.localeCompare(b.ad));
             renderProducts(filtered);
         }
 
@@ -297,13 +324,15 @@
 
         function renderProducts(data) {
             const list = document.getElementById('product-list');
-            list.innerHTML = data.map((item, i) => {
+            list.innerHTML = data.map((item) => {
                 const realIdx = allProducts.indexOf(item);
+                const isNew = item.ad && item.ad.includes("2026");
                 return `
                 <div class="col s12 m6 l4">
                     <div class="card product-card">
                         <div class="card-image">
                             <span class="badge-kategori">${item.kategori || 'Genel'}</span>
+                            ${isNew ? '<span class="badge-yeni">YENİ</span>' : ''}
                             <img src="${item.kapak || NO_IMAGE_URL}" loading="lazy">
                         </div>
                         <div class="card-content">
@@ -314,8 +343,8 @@
                                 <div class="input-field col s6"><select id="type-${realIdx}" onchange="updateDisplayPrice(${realIdx})"><option value="yatay">Yatay</option><option value="dikey">Dikey(x2)</option></select></div>
                                 <div class="input-field col s6"><select id="binding-${realIdx}" onchange="updateDisplayPrice(${realIdx})"><option value="zımba">Zımba</option><option value="spiral">Spiral(+20)</option></select></div>
                             </div>
-                            <input type="number" id="qty-${realIdx}" value="1" min="1" onchange="updateDisplayPrice(${realIdx})">
-                            <button class="btn add-to-cart-btn" onclick="addToCart(${realIdx})">SEPETE EKLE</button>
+                            <div class="input-field"><input type="number" id="qty-${realIdx}" value="1" min="1" onchange="updateDisplayPrice(${realIdx})"><label class="active">Adet</label></div>
+                            <button class="btn-large add-to-cart-btn" onclick="addToCart(${realIdx})">SEPETE EKLE</button>
                         </div>
                     </div>
                 </div>`;
@@ -351,7 +380,7 @@
             let total = 0;
             document.getElementById('cart-items').innerHTML = cart.map((c, i) => {
                 total += c.toplam;
-                return `<p>${c.ad} (${c.adet} adet) - <b>${c.toplam.toFixed(2)} ₺</b> <a href="#!" onclick="removeFromCart(${i})" class="red-text">Sil</a></p>`;
+                return `<p>${c.ad} (${c.adet} ad) - <b>${c.toplam.toFixed(2)} ₺</b> <a href="#!" onclick="removeFromCart(${i})" class="red-text right">SİL</a></p>`;
             }).join('');
             document.getElementById('cart-total').innerText = total.toFixed(2);
             document.getElementById('min-order-warning').innerText = total < 400 ? `Minimum 400 ₺ olmalı! Eksik: ${(400-total).toFixed(2)} ₺` : '';
@@ -364,7 +393,7 @@
 
         function sendOrder() {
             let total = 0; cart.forEach(c => total += c.toplam);
-            if(total < 400) { alert("400 ₺ altı sipariş verilemez!"); return; }
+            if(total < 400) { M.toast({html: 'Minimum 400 ₺ olmalı!'}); return; }
             let msg = "Yeni Sipariş:\n" + cart.map(c => `- ${c.ad} (${c.adet} ad, ${c.tip}, ${c.cilt})`).join('\n') + `\nToplam: ${total.toFixed(2)} TL`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`);
         }
@@ -390,8 +419,7 @@
             const csv = Papa.unparse(allProducts);
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = "katalog.csv"; a.click();
+            const a = document.createElement('a'); a.href = url; a.download = "katalog.csv"; a.click();
         }
     </script>
 </body>
