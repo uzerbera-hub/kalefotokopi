@@ -26,8 +26,23 @@
         .search-container:focus-within { box-shadow: 0 6px 20px rgba(21, 101, 192, 0.2); transform: scale(1.01); }
         .search-container input { border: none !important; box-shadow: none !important; margin-bottom: 0 !important; font-size: 1.1rem; color: var(--text-color) !important; }
         
+        /* KPSS Sayaçları */
+        .countdown-container { background: var(--card-bg); padding: 15px 20px 5px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 15px; margin-top: 10px; transition: background-color 0.3s; }
+        .countdown-card { text-align: center; padding: 12px 10px; background: #e3f2fd; border-radius: 12px; margin-bottom: 15px; border: 1px solid #bbdefb; transition: all 0.3s ease; }
+        body.dark-mode .countdown-card { background: #263238; border-color: #37474f; }
+        .countdown-card:hover { transform: translateY(-3px); box-shadow: 0 5px 10px rgba(21, 101, 192, 0.2); }
+        .exam-name { font-weight: 700; color: #1565c0; font-size: 1.05rem; }
+        body.dark-mode .exam-name { color: #90caf9; }
+        .exam-date { font-size: 0.8rem; color: #757575; margin-bottom: 10px; }
+        body.dark-mode .exam-date { color: #b0bec5; }
+        .timer { display: flex; justify-content: center; gap: 8px; }
+        .time-box { background: #1565c0; color: white; padding: 5px; border-radius: 8px; min-width: 48px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        body.dark-mode .time-box { background: #0d47a1; }
+        .time-box span { font-weight: 700; font-size: 1.2rem; line-height: 1; margin-bottom: 3px; }
+        .time-box small { font-size: 0.65rem; opacity: 0.9; text-transform: uppercase; }
+
         /* Filtreler */
-        .filter-section { background: var(--card-bg); padding: 15px 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; margin-top: 10px; transition: background-color 0.3s; }
+        .filter-section { background: var(--card-bg); padding: 15px 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; transition: background-color 0.3s; }
         .filter-title { font-weight: 600; color: #757575; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
         .chip.filter-chip { cursor: pointer; transition: 0.3s; background-color: #e3f2fd; color: #1565c0; font-weight: 500; }
         .chip.filter-chip:hover, .chip.filter-chip.active { background-color: #1565c0; color: white; box-shadow: 0 4px 8px rgba(21,101,192,0.4); transform: translateY(-2px); }
@@ -88,7 +103,7 @@
         .admin-table input { border-bottom: 1px solid var(--border-color) !important; margin-bottom: 0 !important; height: 2rem !important; font-size: 0.9rem !important; color: var(--text-color) !important;}
         .admin-preview-img { width: 40px; height: 50px; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); margin-left: 10px; vertical-align: middle; background-color:#eee; }
 
-        /* MOBİL UYUMLULUK (RESPONSIVE) CSS EKLENDİ */
+        /* MOBİL UYUMLULUK (RESPONSIVE) CSS */
         @media only screen and (max-width: 600px) {
             .brand-logo { font-size: 1.4rem !important; padding-left: 10px !important; }
             .sticky-header { padding-top: 5px; padding-bottom: 5px; }
@@ -97,18 +112,14 @@
             .card-title { font-size: 1rem !important; line-height: 1.3rem !important; }
             .price-tag { font-size: 1.6rem; }
             .card-content { padding: 15px; }
-            
-            /* Turuncu butonun içindeki metnin sığması için ayarlar */
-            .btn-large.request-btn { 
-                height: auto; 
-                line-height: normal; 
-                padding: 12px 15px; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center; 
-            }
+            .btn-large.request-btn { height: auto; line-height: normal; padding: 12px 15px; display: flex; align-items: center; justify-content: center; }
             .request-btn-text { font-size: 0.9rem; white-space: normal; text-align: left; }
             .request-btn i { margin-right: 10px !important; }
+            
+            /* Mobil için Sayaç Küçültme */
+            .time-box { min-width: 40px; padding: 4px; }
+            .time-box span { font-size: 1rem; }
+            .exam-name { font-size: 0.95rem; }
         }
     </style>
 </head>
@@ -151,7 +162,53 @@
 
     <main class="container">
         
-        <div class="row" style="margin-top: 10px; margin-bottom: 0;">
+        <div class="row" style="margin-top: 15px; margin-bottom: 0;">
+            <div class="col s12">
+                <div class="countdown-container">
+                    <span class="filter-title" style="text-align: center; margin-bottom:15px; color:#1565c0;"><i class="material-icons" style="vertical-align: bottom; font-size: 1.4rem;">timer</i> 2026 KPSS Sınavlarına Kalan Süre</span>
+                    <div class="row" style="margin-bottom: 0;">
+                        <div class="col s12 m4">
+                            <div class="countdown-card">
+                                <div class="exam-name">KPSS Lisans</div>
+                                <div class="exam-date">6 Eylül 2026</div>
+                                <div class="timer" id="timer-lisans">
+                                    <div class="time-box"><span id="l-d">00</span><small>Gün</small></div>
+                                    <div class="time-box"><span id="l-h">00</span><small>Saat</small></div>
+                                    <div class="time-box"><span id="l-m">00</span><small>Dk</small></div>
+                                    <div class="time-box"><span id="l-s">00</span><small>Sn</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4">
+                            <div class="countdown-card">
+                                <div class="exam-name">KPSS Ön Lisans</div>
+                                <div class="exam-date">4 Ekim 2026</div>
+                                <div class="timer" id="timer-onlisans">
+                                    <div class="time-box"><span id="o-d">00</span><small>Gün</small></div>
+                                    <div class="time-box"><span id="o-h">00</span><small>Saat</small></div>
+                                    <div class="time-box"><span id="o-m">00</span><small>Dk</small></div>
+                                    <div class="time-box"><span id="o-s">00</span><small>Sn</small></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s12 m4">
+                            <div class="countdown-card">
+                                <div class="exam-name">KPSS Ortaöğretim</div>
+                                <div class="exam-date">25 Ekim 2026</div>
+                                <div class="timer" id="timer-ortaogretim">
+                                    <div class="time-box"><span id="or-d">00</span><small>Gün</small></div>
+                                    <div class="time-box"><span id="or-h">00</span><small>Saat</small></div>
+                                    <div class="time-box"><span id="or-m">00</span><small>Dk</small></div>
+                                    <div class="time-box"><span id="or-s">00</span><small>Sn</small></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top: 5px; margin-bottom: 0;">
             <div class="col s12 center-align">
                 <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable request-btn" style="border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3); width: 100%; max-width: 500px;">
                     <i class="material-icons left">menu_book</i>
@@ -331,6 +388,13 @@
         // GÖRSEL HAZIRLANIYOR UYARISI
         const NO_IMAGE_URL = `data:image/svg+xml;charset=UTF-8,` + encodeURIComponent(`<svg width="400" height="550" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="550" fill="#eeeeee"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#757575">GÖRSEL</text><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#757575">HAZIRLANIYOR</text></svg>`);
 
+        // KPSS Sınav Tarihleri (ÖSYM 2026 Takvimi)
+        const examDates = {
+            lisans: new Date("September 6, 2026 10:15:00").getTime(),
+            onlisans: new Date("October 4, 2026 10:15:00").getTime(),
+            ortaogretim: new Date("October 25, 2026 10:15:00").getTime()
+        };
+
         let allProducts = [];
         let currentFilter = { kategori: '', marka: '' };
         let cart = [];
@@ -346,6 +410,7 @@
             checkTheme();
             loadCartFromMemory();
             loadCatalog();
+            startCountdowns();
             
             window.addEventListener('scroll', function() {
                 var btn = document.getElementById('scroll-top-btn');
@@ -353,6 +418,33 @@
                 else { btn.classList.remove('visible'); }
             });
         });
+
+        // KPSS SAYAÇ FONKSİYONU
+        function startCountdowns() {
+            setInterval(function() {
+                const now = new Date().getTime();
+                updateTimer('lisans', 'l', examDates.lisans, now);
+                updateTimer('onlisans', 'o', examDates.onlisans, now);
+                updateTimer('ortaogretim', 'or', examDates.ortaogretim, now);
+            }, 1000);
+        }
+
+        function updateTimer(examKey, prefix, examDate, now) {
+            const distance = examDate - now;
+            if (distance < 0) {
+                document.getElementById(`timer-${examKey}`).innerHTML = "<div style='color:#d32f2f; font-weight:bold; margin-top:10px; font-size:1.1rem;'>Sınav Zamanı! Başarılar!</div>";
+                return;
+            }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById(`${prefix}-d`).innerText = days < 10 ? '0' + days : days;
+            document.getElementById(`${prefix}-h`).innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById(`${prefix}-m`).innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById(`${prefix}-s`).innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
 
         // TEMA (DARK MODE) SİSTEMİ
         function checkTheme() {
