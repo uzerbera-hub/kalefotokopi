@@ -3,31 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kale Fotokopi - Ürün Kataloğu</title>
+    <title>Kale Fotokopi - Online Katalog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <style>
-        body { background-color: #f5f5f5; display: flex; min-height: 100vh; flex-direction: column; }
+        /* Profesyonel Tasarım Ayarları */
+        body { 
+            background-color: #f0f2f5; 
+            font-family: 'Poppins', sans-serif;
+            display: flex; min-height: 100vh; flex-direction: column; 
+        }
         main { flex: 1 0 auto; }
-        .brand-logo { padding-left: 20px !important; font-weight: bold; }
-        .card { border-radius: 10px; overflow: hidden; }
-        .card-content { padding: 16px; }
-        .price-tag { font-size: 1.6rem; font-weight: bold; color: #d32f2f; margin: 10px 0; }
-        .product-code { font-size: 0.8rem; color: #9e9e9e; }
-        #cart-btn { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
-        .cart-item { border-bottom: 1px solid #e0e0e0; padding: 10px 0; }
-        .card-image img { height: 200px; object-fit: cover; }
         
-        /* Bilgilendirme Ekranı Yazı Ayarları */
-        #info-modal ol { padding-left: 20px; }
-        #info-modal li { margin-bottom: 10px; font-weight: 500; }
+        /* Üst Menü */
+        nav { background-color: #1565c0 !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .brand-logo { font-weight: 700; font-size: 1.8rem; padding-left: 20px !important; letter-spacing: 1px;}
+        
+        /* Arama Kutusu */
+        .search-container {
+            background: #fff; border-radius: 30px; padding: 5px 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-top: 30px; margin-bottom: 20px;
+        }
+        .search-container input { border: none !important; box-shadow: none !important; margin-bottom: 0 !important; font-size: 1.1rem; }
+        
+        /* Filtre Butonları (Kategori ve Marka) */
+        .filter-section { background: #fff; padding: 15px 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .filter-title { font-weight: 600; color: #555; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .chip.filter-chip { cursor: pointer; transition: 0.3s; background-color: #e3f2fd; color: #1565c0; font-weight: 500; }
+        .chip.filter-chip:hover, .chip.filter-chip.active { background-color: #1565c0; color: white; box-shadow: 0 2px 5px rgba(21,101,192,0.4); }
+        
+        /* Ürün Kartları */
+        .product-card { border-radius: 15px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; border: none; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.15); }
+        .card-image { background: #e0e0e0; position: relative; padding-top: 15px; text-align: center; }
+        .card-image img { height: 220px; width: auto; max-width: 90%; object-fit: cover; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border-radius: 4px; margin: 0 auto 15px auto; }
+        
+        .badge-kategori { position: absolute; top: 10px; left: 10px; background: #ff9800; color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .card-content { padding: 20px; }
+        .product-code { font-size: 0.8rem; color: #757575; display: block; margin-bottom: 5px; }
+        .card-title { font-size: 1.1rem !important; font-weight: 600 !important; line-height: 1.4rem !important; color: #212121; height: 45px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .price-tag { font-size: 1.8rem; font-weight: 700; color: #2e7d32; margin: 15px 0; }
+        
+        /* Butonlar ve Seçim Alanları */
+        .input-field select { color: #424242; font-weight: 500; }
+        .add-to-cart-btn { width: 100%; border-radius: 25px; font-weight: 600; letter-spacing: 0.5px; height: 45px; line-height: 45px; background: linear-gradient(45deg, #1565c0, #1976d2); }
+        #cart-btn { position: fixed; bottom: 30px; right: 30px; z-index: 999; width: 65px; height: 65px; background-color: #d32f2f !important; }
+        #cart-btn i { line-height: 65px; font-size: 2rem; }
+        
+        /* Footer / İletişim */
+        page-footer { background-color: #263238; color: white; padding-top: 20px; }
+        .footer-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 15px; color: #eceff1; }
+        .contact-info li { margin-bottom: 10px; display: flex; align-items: center; }
+        .contact-info i { margin-right: 10px; color: #90caf9; }
     </style>
 </head>
 <body>
 
-    <nav class="blue darken-3">
+    <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Kale Fotokopi</a>
+            <a href="#" class="brand-logo"><i class="material-icons left" style="font-size: 2.2rem; margin-top:2px;">local_library</i>Kale Fotokopi</a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="#cart-modal" class="modal-trigger"><i class="material-icons left">shopping_cart</i>Sepetim (<span id="cart-count-nav">0</span>)</a></li>
             </ul>
@@ -35,11 +71,32 @@
     </nav>
 
     <main class="container">
-        <div class="row" style="margin-top: 20px;">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">search</i>
-                <input type="text" id="searchInput" onkeyup="filterProducts()">
-                <label for="searchInput">Ürün Adı, Marka veya Kategori Ara...</label>
+        <div class="row">
+            <div class="col s12">
+                <div class="search-container d-flex align-items-center">
+                    <div class="input-field" style="margin: 0; display: flex; align-items: center;">
+                        <i class="material-icons" style="color: #9e9e9e; margin-right: 10px;">search</i>
+                        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Kitap, yazar, marka veya kod ara..." style="border-bottom: none; width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="filter-section">
+                    <span class="filter-title"><i class="material-icons left" style="font-size: 1rem; margin-top: 2px;">category</i> Kategoriler</span>
+                    <div id="category-filters">
+                        <div class="chip filter-chip active" onclick="applyFilter('kategori', '')">Tümü</div>
+                    </div>
+                    
+                    <div class="divider" style="margin: 15px 0;"></div>
+                    
+                    <span class="filter-title"><i class="material-icons left" style="font-size: 1rem; margin-top: 2px;">business</i> Yayınevleri / Markalar</span>
+                    <div id="brand-filters">
+                        <div class="chip filter-chip active" onclick="applyFilter('marka', '')">Tümü</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -52,49 +109,71 @@
                         <div class="circle-clipper right"><div class="circle"></div></div>
                     </div>
                 </div>
-                <p>Katalog Yükleniyor...</p>
+                <p style="font-weight: 500; color:#555;">Katalog Yükleniyor, Lütfen Bekleyin...</p>
             </div>
         </div>
     </main>
 
-    <a href="#cart-modal" id="cart-btn" class="btn-floating btn-large red modal-trigger pulse">
-        <i class="large material-icons">shopping_cart</i>
+    <footer class="page-footer blue-grey darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text" style="font-weight:700;">Kale Fotokopi</h5>
+                    <p class="grey-text text-lighten-4">Ders notları, soru bankaları ve tüm fotokopi ihtiyaçlarınız için kaliteli ve hızlı hizmet.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="footer-title">İletişim Bilgileri</h5>
+                    <ul class="contact-info">
+                        <li><i class="material-icons">phone</i> 0500 000 00 00</li>
+                        <li><i class="material-icons">message</i> WhatsApp & Telegram'dan sipariş verebilirsiniz.</li>
+                        <li><i class="material-icons">location_on</i> Çanakkale Merkez</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright" style="background-color: rgba(0,0,0,0.2);">
+            <div class="container center-align">
+                © 2026 Kale Fotokopi - Tüm Hakları Saklıdır
+            </div>
+        </div>
+    </footer>
+
+    <a href="#cart-modal" id="cart-btn" class="btn-floating btn-large waves-effect waves-light pulse">
+        <i class="material-icons">shopping_cart</i>
     </a>
 
-    <div id="info-modal" class="modal">
+    <div id="info-modal" class="modal" style="border-radius: 15px;">
         <div class="modal-content">
-            <h4 class="blue-text text-darken-3" style="font-weight: bold;">GENEL BİLGİLENDİRME</h4>
-            <ol>
-                <li>KİTAPLARIN FİYATLARI SAYFADA İKİLİ ZIMBALI FİYATLARIDIR.</li>
-                <li>İSTEĞE GÖRE SPİRAL YAPILIR.</li>
-                <li>SPİRAL ÜCRETİMİZ 20 ₺’DİR.</li>
-                <li>İSTEĞE GÖRE TAMBOY DİKEY ÇIKARILABİLİR, O ZAMAN FİYAT LİSTE FİYATININ İKİ KATI ŞEKLİNDE OLACAKTIR.</li>
-                <li>YANLIŞ YAZILAN KODLAR BİZİM SORUMLULUĞUMUZDA DEĞİLDİR.</li>
-                <li>AKSİ HALDE SİLİK BASKI, YANLIŞ KİTAP VS. DURUMLARDA İADEMİZ MEVCUTTUR.</li>
+            <h5 class="blue-text text-darken-3" style="font-weight: bold; text-align:center; margin-bottom: 20px;"><i class="material-icons" style="vertical-align: bottom;">info</i> GENEL BİLGİLENDİRME</h5>
+            <ol style="font-size: 1.1rem; line-height: 1.8rem; color: #424242;">
+                <li>Kitapların fiyatları sayfada <strong>ikili zımbalı</strong> fiyatlarıdır.</li>
+                <li>İsteğe göre <strong>spiral</strong> yapılır. Spiral ücretimiz <strong>20 ₺</strong>'dir.</li>
+                <li>İsteğe göre tamboy <strong>dikey</strong> çıkarılabilir, o zaman fiyat liste fiyatının <strong>iki katı</strong> olacaktır.</li>
+                <li>Yanlış yazılan kodlar bizim sorumluluğumuzda değildir.</li>
+                <li>Aksi halde silik baskı, yanlış kitap vs. durumlarda <strong>iademiz mevcuttur</strong>.</li>
             </ol>
         </div>
-        <div class="modal-footer" style="text-align: center;">
-            <a href="#!" class="modal-close waves-effect waves-light btn-large green darken-2" style="width: 50%; border-radius: 20px;">
-                <i class="material-icons left">check</i> ANLADIM
+        <div class="modal-footer" style="text-align: center; padding-bottom: 20px;">
+            <a href="#!" class="modal-close waves-effect waves-light btn-large green darken-2" style="width: 80%; border-radius: 30px; font-weight: bold;">
+                <i class="material-icons left">check_circle</i> OKUDUM, ANLADIM
             </a>
         </div>
     </div>
 
-    <div id="cart-modal" class="modal modal-fixed-footer">
+    <div id="cart-modal" class="modal bottom-sheet" style="max-height: 80%; border-radius: 20px 20px 0 0;">
         <div class="modal-content">
-            <h4>Sepetim</h4>
-            <div id="cart-items">
+            <h4 style="font-weight: bold;">Sepetim</h4>
+            <div id="cart-items" style="margin-top: 20px;">
                 <p class="grey-text">Sepetiniz şu an boş.</p>
             </div>
-            <h5 class="right-align" style="margin-top: 20px;">Toplam: <span id="cart-total">0.00</span> ₺</h5>
+            <h4 class="right-align green-text text-darken-2" style="font-weight: bold; margin-top: 30px;">Toplam: <span id="cart-total">0.00</span> ₺</h4>
         </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Kapat</a>
-            <button class="waves-effect waves-light btn green darken-1" onclick="sendOrder('whatsapp')">
-                <i class="material-icons left">chat</i>WhatsApp'a Gönder
+        <div class="modal-footer" style="padding: 0 24px 24px 24px;">
+            <button class="waves-effect waves-light btn-large green darken-1" style="border-radius: 30px;" onclick="sendOrder('whatsapp')">
+                <i class="material-icons left">chat</i>WhatsApp İle Sipariş
             </button>
-            <button class="waves-effect waves-light btn blue darken-1" onclick="sendOrder('telegram')">
-                <i class="material-icons left">send</i>Telegram'a Gönder
+            <button class="waves-effect waves-light btn-large blue darken-1" style="border-radius: 30px; margin-left:10px;" onclick="sendOrder('telegram')">
+                <i class="material-icons left">send</i>Telegram İle Sipariş
             </button>
         </div>
     </div>
@@ -103,48 +182,95 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
     <script>
-        // BURALARA KENDİ BİLGİLERİNİ YAZMAYI UNUTMA!
-        const WHATSAPP_NUMBER = "905000000000"; // Başında + olmadan ülke koduyla
-        const TELEGRAM_USERNAME = "kullaniciadiniz"; // Başında @ olmadan
+        // KENDİ BİLGİLERİNİ GİR
+        const WHATSAPP_NUMBER = "905000000000"; 
+        const TELEGRAM_USERNAME = "kullaniciadiniz"; 
 
-        let products = [];
+        let allProducts = [];
+        let currentFilter = { kategori: '', marka: '' };
         let cart = [];
 
-        // Sayfa açıldığında çalışacaklar
         document.addEventListener('DOMContentLoaded', function() {
-            // Sepet gibi normal pencereleri ayarla
             M.Modal.init(document.querySelectorAll('.modal:not(#info-modal)'));
-            
-            // Bilgilendirme ekranını "dışarı tıklanınca kapanmaz (dismissible: false)" olarak ayarla ve aç
-            var infoModalElem = document.getElementById('info-modal');
-            var infoModal = M.Modal.init(infoModalElem, { dismissible: false });
+            var infoModal = M.Modal.init(document.getElementById('info-modal'), { dismissible: false });
             infoModal.open();
-
             loadCatalog();
         });
 
-        // CSV dosyasını okuma
         function loadCatalog() {
             Papa.parse("katalog.csv", {
                 download: true,
                 header: true,
                 skipEmptyLines: true,
                 complete: function(results) {
-                    products = results.data;
-                    renderProducts(products);
+                    allProducts = results.data;
+                    generateFilters();
+                    renderProducts(allProducts);
                 }
             });
         }
 
-        // Fiyatı sayıya çevirme
+        // CSV'deki verileri tarayıp Kategori ve Marka butonlarını otomatik oluşturur
+        function generateFilters() {
+            const categories = new Set();
+            const brands = new Set();
+
+            allProducts.forEach(p => {
+                if(p.kategori && p.kategori.trim() !== '') categories.add(p.kategori.trim());
+                if(p.marka && p.marka.trim() !== '') brands.add(p.marka.trim());
+            });
+
+            const catContainer = document.getElementById('category-filters');
+            categories.forEach(cat => {
+                catContainer.innerHTML += `<div class="chip filter-chip cat-chip" onclick="applyFilter('kategori', '${cat}', this)">${cat}</div>`;
+            });
+
+            const brandContainer = document.getElementById('brand-filters');
+            brands.forEach(brand => {
+                brandContainer.innerHTML += `<div class="chip filter-chip brand-chip" onclick="applyFilter('marka', '${brand}', this)">${brand}</div>`;
+            });
+        }
+
+        // Butonlara tıklandığında filtreleme yapar
+        function applyFilter(type, value, element) {
+            currentFilter[type] = value;
+            
+            // Renkleri düzenle
+            if(element) {
+                const chips = type === 'kategori' ? document.querySelectorAll('.cat-chip, #category-filters .chip') : document.querySelectorAll('.brand-chip, #brand-filters .chip');
+                chips.forEach(c => c.classList.remove('active'));
+                element.classList.add('active');
+            }
+
+            filterProducts();
+        }
+
+        // ARAMA - TÜRKÇE KARAKTERLERE TAM UYUMLU VE BÜYÜK/KÜÇÜK HARF DUYARSIZ
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLocaleLowerCase('tr-TR').trim();
+            
+            const filtered = allProducts.filter(p => {
+                const ad = (p.ad || '').toLocaleLowerCase('tr-TR');
+                const marka = (p.marka || '').toLocaleLowerCase('tr-TR');
+                const kategori = (p.kategori || '').toLocaleLowerCase('tr-TR');
+                const kod = (p['kod adı'] || '').toLocaleLowerCase('tr-TR');
+
+                const matchesSearch = ad.includes(query) || marka.includes(query) || kategori.includes(query) || kod.includes(query);
+                const matchesCategory = currentFilter.kategori === '' || (p.kategori && p.kategori.trim() === currentFilter.kategori);
+                const matchesBrand = currentFilter.marka === '' || (p.marka && p.marka.trim() === currentFilter.marka);
+
+                return matchesSearch && matchesCategory && matchesBrand;
+            });
+            renderProducts(filtered);
+        }
+
         function parsePrice(priceStr) {
             if(!priceStr) return 0;
             return parseFloat(priceStr.replace('₺', '').replace('.', '').replace(',', '.').trim());
         }
 
-        // Ekranda Seçim Yapıldıkça Fiyatı Anında Değiştiren Kod
         function updateDisplayPrice(index) {
-            const product = products[index];
+            const product = allProducts[index]; // Burayı güncelledik
             const basePrice = parsePrice(product.fiyat);
             
             const type = document.getElementById(`type-${index}`).value;
@@ -152,107 +278,88 @@
             const qty = parseInt(document.getElementById(`qty-${index}`).value) || 1;
             
             let unitPrice = basePrice;
+            if (type === 'dikey') unitPrice *= 2;
+            if (binding === 'spiral') unitPrice += 20;
             
-            // Dikey seçildiyse fiyat 2 ile çarpılır
-            if (type === 'dikey') {
-                unitPrice = unitPrice * 2;
-            }
-            // Spiral seçildiyse birim fiyata 20 TL eklenir
-            if (binding === 'spiral') {
-                unitPrice = unitPrice + 20;
-            }
-            
-            // Toplam fiyat = birim fiyat x adet
-            const totalPrice = unitPrice * qty;
-            
-            // Ekrandaki fiyat yazısını güncelle
-            document.getElementById(`price-display-${index}`).innerText = totalPrice.toFixed(2) + ' ₺';
+            document.getElementById(`price-display-${index}`).innerText = (unitPrice * qty).toFixed(2) + ' ₺';
         }
 
-        // Ürünleri Ekrana Çizme
+        // Ürün Çizimi
         function renderProducts(data) {
             const list = document.getElementById('product-list');
             list.innerHTML = '';
 
+            if(data.length === 0) {
+                list.innerHTML = '<div class="col s12 center-align"><h5 class="grey-text">Aradığınız kriterlerde ürün bulunamadı.</h5></div>';
+                return;
+            }
+
             data.forEach((item, index) => {
+                // Ürün gerçek sırasını bul (Arama sonrası sepete yanlış ürün eklenmemesi için)
+                const realIndex = allProducts.findIndex(p => p === item);
                 const basePrice = parsePrice(item.fiyat);
                 
-                // Kapak resmi yoksa otomatik resim oluştur
+                // Profesyonel Varsayılan Görsel Ayarı (Eğer Excel'de kapak resmi yoksa)
                 let imageUrl = item.kapak;
                 if (!imageUrl || imageUrl.trim() === '') {
-                    // Ürün isminin ilk 20 harfini alıp resmin üstüne yazar
-                    let shortName = item.ad ? item.ad.substring(0, 25) + '...' : 'Urun';
-                    imageUrl = `https://placehold.co/600x400/283593/ffffff?text=${encodeURIComponent(shortName)}`;
+                    // Modern bir kitap ikonu ile kapak oluştur
+                    imageUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.kategori || 'Kitap')}&background=0d47a1&color=fff&size=512&font-size=0.3&length=4`;
                 }
 
                 const html = `
                 <div class="col s12 m6 l4">
-                    <div class="card hoverable">
+                    <div class="card product-card">
                         <div class="card-image">
+                            <span class="badge-kategori">${item.kategori || 'Genel'}</span>
                             <img src="${imageUrl}" alt="${item.ad}">
                         </div>
                         <div class="card-content">
-                            <span class="product-code">${item['kod adı'] || ''} | ${item.marka || ''}</span>
-                            <span class="card-title" style="font-size: 1.1rem; line-height: 1.3rem; margin-top: 8px; font-weight:bold;">${item.ad}</span>
+                            <span class="product-code">Kod: <b>${item['kod adı'] || '-'}</b> | Yayınevi: <b>${item.marka || '-'}</b></span>
+                            <div class="card-title">${item.ad}</div>
                             
-                            <p class="price-tag" id="price-display-${index}">${basePrice.toFixed(2)} ₺</p>
+                            <div class="price-tag" id="price-display-${realIndex}">${basePrice.toFixed(2)} ₺</div>
                             
-                            <div class="row" style="margin-bottom: 0; margin-top: 15px;">
+                            <div class="row" style="margin-bottom: 0;">
                                 <div class="input-field col s6">
-                                    <select id="type-${index}" onchange="updateDisplayPrice(${index})">
+                                    <select id="type-${realIndex}" onchange="updateDisplayPrice(${realIndex})">
                                         <option value="yatay" selected>Yatay</option>
                                         <option value="dikey">Dikey (x2 Fiyat)</option>
                                     </select>
                                     <label>Basım Yönü</label>
                                 </div>
                                 <div class="input-field col s6">
-                                    <select id="binding-${index}" onchange="updateDisplayPrice(${index})">
-                                        <option value="zımba" selected>Zımba (Ücretsiz)</option>
-                                        <option value="spiral">Spiral (+20 ₺)</option>
+                                    <select id="binding-${realIndex}" onchange="updateDisplayPrice(${realIndex})">
+                                        <option value="zımba" selected>İkili Zımba</option>
+                                        <option value="spiral">Spiral (+20₺)</option>
                                     </select>
                                     <label>Cilt Tipi</label>
                                 </div>
                             </div>
-                            <div class="row" style="margin-bottom: 0;">
+                            <div class="row" style="margin-bottom: 10px;">
                                 <div class="input-field col s12">
-                                    <input id="qty-${index}" type="number" min="1" value="1" onchange="updateDisplayPrice(${index})" onkeyup="updateDisplayPrice(${index})">
-                                    <label for="qty-${index}" class="active">Adet</label>
+                                    <input id="qty-${realIndex}" type="number" min="1" value="1" onchange="updateDisplayPrice(${realIndex})" onkeyup="updateDisplayPrice(${realIndex})">
+                                    <label for="qty-${realIndex}" class="active">Sipariş Adedi</label>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-action center-align">
-                            <button class="btn blue darken-3 waves-effect waves-light" style="width: 100%; border-radius: 20px;" onclick="addToCart(${index})">
-                                <i class="material-icons left">add_shopping_cart</i>Sepete Ekle
+                            
+                            <button class="btn add-to-cart-btn waves-effect waves-light" onclick="addToCart(${realIndex})">
+                                <i class="material-icons left">add_shopping_cart</i>SEPETE EKLE
                             </button>
                         </div>
                     </div>
                 </div>`;
                 list.insertAdjacentHTML('beforeend', html);
             });
-            // Seçim kutularını aktifleştir
             M.FormSelect.init(document.querySelectorAll('select'));
         }
 
-        // Arama Kutusu
-        function filterProducts() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(p => {
-                return (p.ad && p.ad.toLowerCase().includes(query)) || 
-                       (p.marka && p.marka.toLowerCase().includes(query)) ||
-                       (p.kategori && p.kategori.toLowerCase().includes(query));
-            });
-            renderProducts(filtered);
-        }
-
-        // Sepete Ekleme İşlemi
         function addToCart(index) {
-            const product = products[index];
+            const product = allProducts[index];
             const type = document.getElementById(`type-${index}`).value;
             const binding = document.getElementById(`binding-${index}`).value;
             const qty = parseInt(document.getElementById(`qty-${index}`).value) || 1;
             
             let unitPrice = parsePrice(product.fiyat);
-            
             if (type === 'dikey') unitPrice *= 2;
             if (binding === 'spiral') unitPrice += 20;
 
@@ -262,16 +369,15 @@
                 kod: product['kod adı'],
                 ad: product.ad,
                 tip: type === 'dikey' ? 'Dikey' : 'Yatay',
-                cilt: binding === 'spiral' ? 'Spiral (+20 ₺)' : 'Zımba',
+                cilt: binding === 'spiral' ? 'Spiral' : 'Zımba',
                 adet: qty,
                 toplamFiyat: finalPrice
             });
 
-            M.toast({html: 'Ürün sepete eklendi!', classes: 'green rounded'});
+            M.toast({html: '<i class="material-icons left">check_circle</i> Ürün sepete eklendi!', classes: 'green rounded'});
             updateCartUI();
         }
 
-        // Sepet Ekranını Güncelleme
         function updateCartUI() {
             const cartDiv = document.getElementById('cart-items');
             document.getElementById('cart-count-nav').innerText = cart.length;
@@ -289,14 +395,14 @@
                 grandTotal += item.toplamFiyat;
                 html += `
                 <div class="cart-item">
-                    <div class="row" style="margin-bottom: 0;">
+                    <div class="row" style="margin-bottom: 0; align-items: center; display: flex;">
                         <div class="col s10">
-                            <strong>${item.kod || ''} - ${item.ad}</strong><br>
-                            ${item.adet} Adet | ${item.tip} | ${item.cilt}<br>
-                            <span class="green-text" style="font-weight: bold;">${item.toplamFiyat.toFixed(2)} ₺</span>
+                            <span style="font-weight:600; color:#1565c0;">[${item.kod || '-'}]</span> <strong>${item.ad}</strong><br>
+                            <span class="grey-text text-darken-1">${item.adet} Adet | ${item.tip} | ${item.cilt}</span><br>
+                            <span class="green-text" style="font-weight: 700; font-size:1.2rem;">${item.toplamFiyat.toFixed(2)} ₺</span>
                         </div>
                         <div class="col s2 right-align">
-                            <a href="#!" class="red-text" onclick="removeFromCart(${index})"><i class="material-icons">delete</i></a>
+                            <a href="#!" class="btn-floating btn-small red" onclick="removeFromCart(${index})"><i class="material-icons">delete</i></a>
                         </div>
                     </div>
                 </div>`;
@@ -306,14 +412,11 @@
             document.getElementById('cart-total').innerText = grandTotal.toFixed(2);
         }
 
-        // Sepetten Ürün Çıkarma
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartUI();
-            M.toast({html: 'Ürün sepetten çıkarıldı', classes: 'red rounded'});
         }
 
-        // Siparişi WhatsApp veya Telegram'a İletme
         function sendOrder(platform) {
             if(cart.length === 0) {
                 M.toast({html: 'Sepetiniz boş!', classes: 'red rounded'});
@@ -324,7 +427,7 @@
             let total = 0;
 
             cart.forEach((item, i) => {
-                message += `${i+1}. [${item.kod || ''}] ${item.ad}%0A   - ${item.adet} Adet, ${item.tip} Basım, ${item.cilt}%0A   - Tutar: ${item.toplamFiyat.toFixed(2)} TL%0A%0A`;
+                message += `*${i+1}. [${item.kod || '-'}] ${item.ad}*%0A   - ${item.adet} Adet, ${item.tip}, ${item.cilt}%0A   - Tutar: ${item.toplamFiyat.toFixed(2)} TL%0A%0A`;
                 total += item.toplamFiyat;
             });
 
