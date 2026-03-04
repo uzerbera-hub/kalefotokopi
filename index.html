@@ -21,39 +21,19 @@
         nav { background-color: var(--nav-bg) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: background-color 0.3s; }
         .brand-logo { font-weight: 700; font-size: 1.8rem; padding-left: 20px !important; letter-spacing: 1px;}
         
-        /* Arama & Sıralama Kutuları (Eşitlenmiş ve Hizalanmış) */
+        /* Arama & Sıralama Kutuları */
         .search-container, .sort-container { 
-            background: var(--card-bg); 
-            border-radius: 30px; 
-            padding: 0 20px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
-            transition: all 0.3s ease; 
-            height: 50px; 
-            display: flex; 
-            align-items: center; 
-            width: 100%; 
+            background: var(--card-bg); border-radius: 30px; padding: 0 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+            transition: all 0.3s ease; height: 50px; display: flex; align-items: center; width: 100%; 
         }
         .search-container:focus-within, .sort-container:focus-within { box-shadow: 0 6px 20px rgba(21, 101, 192, 0.2); transform: scale(1.01); }
         .search-container input { border: none !important; box-shadow: none !important; margin-bottom: 0 !important; font-size: 1.1rem; color: var(--text-color) !important; height: 100% !important; }
         
-        select.browser-default { 
-            width: 100%; border: none; background: transparent; color: var(--text-color); outline: none; cursor: pointer; font-size: 1rem; padding: 0; font-family: 'Poppins', sans-serif;
-        }
+        select.browser-default { width: 100%; border: none; background: transparent; color: var(--text-color); outline: none; cursor: pointer; font-size: 1rem; padding: 0; font-family: 'Poppins', sans-serif;}
         body.dark-mode select.browser-default option { background-color: #333; color: #e0e0e0; }
 
-        /* Turuncu İstek Butonu Düzeltmesi */
-        .request-btn {
-            height: auto !important;
-            padding: 15px 20px !important;
-            line-height: 1.4 !important;
-            display: inline-flex !important;
-            align-items: center;
-            justify-content: center;
-            border-radius: 30px;
-            font-weight: bold;
-            width: 100%;
-            max-width: 600px;
-        }
+        /* Turuncu İstek Butonu */
+        .request-btn { height: auto !important; padding: 15px 20px !important; line-height: 1.4 !important; display: inline-flex !important; align-items: center; justify-content: center; border-radius: 30px; font-weight: bold; width: 100%; max-width: 600px; }
         .request-btn span { white-space: normal; text-align: center; font-size: 1rem; }
 
         /* KPSS Sayaçları */
@@ -62,8 +42,8 @@
         body.dark-mode .countdown-card { background: #1a237e; border-color: #283593; }
         .exam-name { font-weight: 700; color: #1565c0; font-size: 1rem; }
         body.dark-mode .exam-name { color: #bbdefb; }
-        .exam-date { font-size: 0.75rem; color: #757575; margin-bottom: 5px; }
-        body.dark-mode .exam-date { color: #90a4ae; }
+        .exam-date { font-size: 0.75rem; color: #757575; margin-bottom: 5px; font-weight: 500; }
+        body.dark-mode .exam-date { color: #b0bec5; }
         .timer { display: flex; justify-content: center; gap: 5px; }
         .time-box { background: #1565c0; color: white; padding: 4px; border-radius: 6px; min-width: 42px; display: flex; flex-direction: column; align-items: center; }
         .time-box span { font-weight: 700; font-size: 1.1rem; line-height: 1; }
@@ -77,8 +57,8 @@
         body.dark-mode .chip.filter-chip { background-color: #333; color: #90caf9; }
         body.dark-mode .chip.filter-chip.active { background-color: #1976d2; color: #fff; }
 
-        /* ÜRÜN KARTLARI VE EŞİT BOŞLUK AYARLARI */
-        .product-wrapper { padding: 15px !important; display: flex; } /* Her yönden 15px boşluk sağlar */
+        /* ÜRÜN KARTLARI */
+        .product-wrapper { padding: 15px !important; display: flex; } 
         .product-card { background-color: var(--card-bg); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; border: none; width: 100%; display: flex; flex-direction: column; margin: 0 !important; }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(0,0,0,0.15); }
         
@@ -100,6 +80,7 @@
         body.dark-mode .select-dropdown, body.dark-mode .dropdown-content { background-color: #333 !important; color: #e0e0e0 !important; }
         body.dark-mode .dropdown-content li>a, body.dark-mode .dropdown-content li>span { color: #90caf9 !important; }
         body.dark-mode input[type=number] { color: #e0e0e0; border-bottom: 1px solid #555; }
+        body.dark-mode input[type=text] { color: #e0e0e0; }
         
         .add-to-cart-btn { width: 100%; border-radius: 25px; font-weight: 600; letter-spacing: 0.5px; height: 45px; line-height: 45px; background: linear-gradient(45deg, #1565c0, #1976d2); transition: 0.3s; margin-top: auto;}
         .add-to-cart-btn:hover { background: linear-gradient(45deg, #0d47a1, #1565c0); box-shadow: 0 4px 12px rgba(13, 71, 161, 0.4); }
@@ -126,7 +107,7 @@
         .contact-info li { margin-bottom: 10px; display: flex; align-items: center; }
         .contact-info i { margin-right: 10px; color: #90caf9; }
         
-        /* Eski Efsane Bilgilendirme Ekranı */
+        /* Bilgilendirme Ekranı */
         #info-modal { border-radius: 15px; width: 90% !important; max-width: 600px; }
         #info-modal h5 { font-weight: bold; color: #1565c0; padding-bottom: 10px; }
         body.dark-mode #info-modal h5 { color: #90caf9; }
@@ -149,6 +130,10 @@
             .time-box { min-width: 40px; padding: 4px; }
             .time-box span { font-size: 1.1rem; }
             .exam-name { font-size: 0.95rem; }
+            
+            .btn-large.request-btn { height: auto; line-height: normal; padding: 12px 15px; display: flex; align-items: center; justify-content: center; }
+            .request-btn-text { font-size: 0.9rem; white-space: normal; text-align: left; }
+            .request-btn i { margin-right: 10px !important; }
         }
     </style>
 </head>
@@ -264,15 +249,16 @@
         </div>
 
         <div class="row" id="product-list" style="display: flex; flex-wrap: wrap;">
-            <div class="col s12 center-align" style="margin-top: 50px; width: 100%;">
-                <div class="preloader-wrapper big active">
-                    <div class="spinner-layer spinner-blue-only">
-                        <div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div>
-                    </div>
-                </div>
-                <p style="font-weight: 500; color:#555; margin-top:20px;">Vitrin Hazırlanıyor, Lütfen Bekleyin...</p>
+            </div>
+
+        <div class="row" style="margin-bottom: 50px;">
+            <div class="col s12 center-align">
+                <button id="load-more-btn" class="btn-large blue darken-2 waves-effect waves-light" style="display:none; border-radius: 30px; width: 100%; max-width: 400px; font-weight:bold; box-shadow: 0 4px 10px rgba(25, 118, 210, 0.4);" onclick="loadMoreProducts()">
+                    <i class="material-icons left">refresh</i>Daha Fazla Ürün Göster
+                </button>
             </div>
         </div>
+
     </main>
 
     <footer class="page-footer blue-grey darken-4">
@@ -375,9 +361,17 @@
     <div id="admin-modal" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h4 class="blue-text text-darken-3" style="font-weight: bold;"><i class="material-icons left" style="font-size:2.2rem;">admin_panel_settings</i> Yönetici Paneli</h4>
-            <p class="grey-text text-darken-2">Resim linklerini, fiyatları ve adları güncelleyin. Yeni ürün ekleyin.</p>
+            <p class="grey-text text-darken-2">2000 ürünü kasmadan yönetmek için arama çubuğunu kullanın.</p>
             
-            <button class="btn green darken-1" onclick="adminAddNewRow()" style="margin-bottom: 15px; border-radius:20px;"><i class="material-icons left">add_circle</i>Yeni Ürün Ekle</button>
+            <div class="row" style="margin-bottom:0;">
+                <div class="input-field col s12 m8">
+                    <i class="material-icons prefix">search</i>
+                    <input type="text" id="adminSearchInput" onkeyup="filterAdminTable()" placeholder="Düzenlemek istediğiniz ürünü ara...">
+                </div>
+                <div class="col s12 m4" style="margin-top:15px;">
+                    <button class="btn green darken-1" style="width:100%; border-radius:20px;" onclick="adminAddNewRow()"><i class="material-icons left">add_circle</i>Yeni Ürün</button>
+                </div>
+            </div>
             
             <div style="overflow-x: auto;">
                 <table class="striped admin-table highlight">
@@ -386,7 +380,7 @@
                             <th>Kod</th>
                             <th>Kategori</th>
                             <th>Marka</th>
-                            <th>Alan(Gizli)</th>
+                            <th>Alan</th>
                             <th>Ürün Adı</th>
                             <th>Fiyat (₺)</th>
                             <th style="min-width:250px;">Kapak Görsel Linki & Önizleme</th>
@@ -396,12 +390,15 @@
                     <tbody id="admin-table-body">
                         </tbody>
                 </table>
+                <div class="center-align" style="margin-top: 15px;">
+                    <button id="admin-load-more-btn" class="btn blue" style="display:none; border-radius:20px;" onclick="loadMoreAdmin()">Daha Fazla Sonuç Göster</button>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-red btn-flat">İptal</a>
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Kapat</a>
             <button class="waves-effect waves-light btn blue darken-3" style="border-radius: 20px; font-weight:bold;" onclick="saveAndDownloadCSV()">
-                <i class="material-icons left">cloud_download</i>Kaydet ve İndir
+                <i class="material-icons left">cloud_download</i>Dosyayı İndir
             </button>
         </div>
     </div>
@@ -418,7 +415,7 @@
         // GÖRSEL HAZIRLANIYOR UYARISI
         const NO_IMAGE_URL = `data:image/svg+xml;charset=UTF-8,` + encodeURIComponent(`<svg width="400" height="550" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="550" fill="#eeeeee"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#ff9800">GÖRSEL</text><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#757575">HAZIRLANIYOR</text></svg>`);
 
-        // KPSS Sınav Tarihleri (ÖSYM 2026 Takvimi)
+        // KPSS Sınav Tarihleri 
         const examDates = {
             lisans: new Date("September 6, 2026 10:15:00").getTime(),
             onlisans: new Date("October 4, 2026 10:15:00").getTime(),
@@ -428,22 +425,28 @@
         let allProducts = [];
         let currentFilter = { kategori: '', marka: '' };
         let cart = [];
+        
+        // 2000 ÜRÜN İÇİN SAYFALANDIRMA (PAGINATION) DEĞİŞKENLERİ
+        let currentFilteredData = [];
+        let currentlyDisplayed = 0;
+        const itemsPerPage = 24; 
+
+        // ADMIN SAYFALANDIRMA DEĞİŞKENLERİ
+        let adminFilteredData = [];
+        let adminDisplayed = 0;
+        const adminPerPage = 50;
 
         document.addEventListener('DOMContentLoaded', function() {
             M.Modal.init(document.querySelectorAll('.modal:not(#info-modal)'));
-            // Bilgilendirme ekranı dışarı tıklayınca kapanmasın
             var infoModal = M.Modal.init(document.getElementById('info-modal'), { dismissible: false });
             infoModal.open();
-            
-            M.FormSelect.init(document.querySelectorAll('select:not(.browser-default)'));
             
             checkTheme();
             loadCartFromMemory();
             loadCatalog();
             
-            // Sayaçları başlat
             setInterval(updateAllTimers, 1000);
-            updateAllTimers(); // İlk saniyeyi beklemeden çalıştır
+            updateAllTimers(); 
             
             window.addEventListener('scroll', function() {
                 var btn = document.getElementById('scroll-top-btn');
@@ -463,14 +466,13 @@
         function updateTimer(prefix, targetDate, now) {
             const dist = targetDate - now;
             if (dist < 0) return; 
-            
             document.getElementById(`${prefix}-d`).innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById(`${prefix}-h`).innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
             document.getElementById(`${prefix}-m`).innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
             document.getElementById(`${prefix}-s`).innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
 
-        // TEMA (DARK MODE) SİSTEMİ
+        // TEMA SİSTEMİ
         function checkTheme() {
             if(localStorage.getItem('kalefotokopi_theme') === 'dark') {
                 document.body.classList.add('dark-mode');
@@ -499,15 +501,6 @@
             });
         }
 
-        // SEPET HAFIZASI
-        function loadCartFromMemory() {
-            const savedCart = localStorage.getItem('kalefotokopi_sepet');
-            if(savedCart) { cart = JSON.parse(savedCart); updateCartUI(); }
-        }
-        function saveCartToMemory() { localStorage.setItem('kalefotokopi_sepet', JSON.stringify(cart)); }
-        function openCartModal() { var instance = M.Modal.getInstance(document.getElementById('cart-modal')); instance.open(); }
-
-        // FİLTRELER VE ARAMA
         function generateFilters() {
             const categories = new Set(); const brands = new Set();
             allProducts.forEach(p => {
@@ -533,7 +526,7 @@
             filterProducts();
         }
 
-        // ARAMA VE AKILLI SIRALAMA
+        // ARAMA VE SIRALAMA 
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLocaleLowerCase('tr-TR').trim();
             const sortVal = document.getElementById('sortSelect').value;
@@ -549,15 +542,14 @@
                 return matchesSearch && matchesCategory && matchesBrand;
             });
 
-            if (sortVal === 'priceAsc') {
-                filtered.sort((a, b) => parsePrice(a.fiyat) - parsePrice(b.fiyat));
-            } else if (sortVal === 'priceDesc') {
-                filtered.sort((a, b) => parsePrice(b.fiyat) - parsePrice(a.fiyat));
-            } else if (sortVal === 'nameAsc') {
-                filtered.sort((a, b) => (a.ad || '').localeCompare(b.ad || ''));
-            }
+            if (sortVal === 'priceAsc') { filtered.sort((a, b) => parsePrice(a.fiyat) - parsePrice(b.fiyat)); } 
+            else if (sortVal === 'priceDesc') { filtered.sort((a, b) => parsePrice(b.fiyat) - parsePrice(a.fiyat)); } 
+            else if (sortVal === 'nameAsc') { filtered.sort((a, b) => (a.ad || '').localeCompare(b.ad || '')); }
 
-            renderProducts(filtered);
+            currentFilteredData = filtered;
+            currentlyDisplayed = 0;
+            document.getElementById('product-list').innerHTML = ''; // Temizle
+            loadMoreProducts(); // İlk partiyi yükle
         }
 
         function parsePrice(priceStr) {
@@ -565,45 +557,25 @@
             return parseFloat(priceStr.replace('₺', '').replace('.', '').replace(',', '.').trim());
         }
 
-        function updateDisplayPrice(index) {
-            const product = allProducts[index];
-            const basePrice = parsePrice(product.fiyat);
-            const type = document.getElementById(`type-${index}`).value;
-            const binding = document.getElementById(`binding-${index}`).value;
-            const qty = parseInt(document.getElementById(`qty-${index}`).value) || 1;
-            
-            let unitPrice = basePrice;
-            if (type === 'dikey') unitPrice *= 2;
-            if (binding === 'spiral') unitPrice += 20;
-            
-            document.getElementById(`price-display-${index}`).innerText = (unitPrice * qty).toFixed(2) + ' ₺';
-        }
-
-        // ÜRÜN PAYLAŞMA
-        function shareProduct(bookName, price) {
-            let message = `Kale Fotokopi'de bu kitabı buldum, incelemek istersen adı:\n\n*${bookName}*\nFiyatı: ${price}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
-        }
-
-        // EŞİT BOŞLUKLU (PADDING) KUSURSUZ GRİD SİSTEMİ
-        function renderProducts(data) {
+        // 2000 ÜRÜN İÇİN YENİ: DAHA FAZLA YÜKLE FONKSİYONU
+        function loadMoreProducts() {
             const list = document.getElementById('product-list');
-            list.innerHTML = '';
-
-            if(data.length === 0) {
+            const chunk = currentFilteredData.slice(currentlyDisplayed, currentlyDisplayed + itemsPerPage);
+            
+            if(chunk.length === 0 && currentlyDisplayed === 0) {
                 list.innerHTML = '<div class="col s12 center-align"><i class="material-icons grey-text" style="font-size:4rem; margin-top:30px;">search_off</i><h5 class="grey-text">Aradığınız kriterlerde ürün bulunamadı.</h5></div>';
+                document.getElementById('load-more-btn').style.display = 'none';
                 return;
             }
 
-            data.forEach((item) => {
-                const realIndex = allProducts.findIndex(p => p === item);
+            let html = '';
+            chunk.forEach((item) => {
+                const realIndex = allProducts.indexOf(item);
                 const basePrice = parsePrice(item.fiyat);
                 const isNew = item.ad && item.ad.includes("2026");
-                
-                let imageUrl = item.kapak;
-                if (!imageUrl || imageUrl.trim() === '') { imageUrl = NO_IMAGE_URL; }
+                let imageUrl = item.kapak || NO_IMAGE_URL;
 
-                const html = `
+                html += `
                 <div class="col s12 m6 l4 product-wrapper">
                     <div class="card product-card">
                         <div class="card-image">
@@ -647,12 +619,48 @@
                         </div>
                     </div>
                 </div>`;
-                list.insertAdjacentHTML('beforeend', html);
             });
+            
+            list.insertAdjacentHTML('beforeend', html);
             M.FormSelect.init(document.querySelectorAll('select:not(.browser-default)'));
+            
+            currentlyDisplayed += chunk.length;
+            
+            // Buton Görünürlüğü
+            if (currentlyDisplayed >= currentFilteredData.length) {
+                document.getElementById('load-more-btn').style.display = 'none';
+            } else {
+                document.getElementById('load-more-btn').style.display = 'inline-block';
+            }
         }
 
-        // SEPET İŞLEMLERİ
+        function updateDisplayPrice(index) {
+            const product = allProducts[index];
+            const basePrice = parsePrice(product.fiyat);
+            const type = document.getElementById(`type-${index}`).value;
+            const binding = document.getElementById(`binding-${index}`).value;
+            const qty = parseInt(document.getElementById(`qty-${index}`).value) || 1;
+            
+            let unitPrice = basePrice;
+            if (type === 'dikey') unitPrice *= 2;
+            if (binding === 'spiral') unitPrice += 20;
+            
+            document.getElementById(`price-display-${index}`).innerText = (unitPrice * qty).toFixed(2) + ' ₺';
+        }
+
+        function shareProduct(bookName, price) {
+            let message = `Kale Fotokopi'de bu kitabı buldum, incelemek istersen adı:\n\n*${bookName}*\nFiyatı: ${price}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // SEPET HAFIZASI VE İŞLEMLERİ
+        function loadCartFromMemory() {
+            const savedCart = localStorage.getItem('kalefotokopi_sepet');
+            if(savedCart) { cart = JSON.parse(savedCart); updateCartUI(); }
+        }
+        function saveCartToMemory() { localStorage.setItem('kalefotokopi_sepet', JSON.stringify(cart)); }
+        function openCartModal() { var instance = M.Modal.getInstance(document.getElementById('cart-modal')); instance.open(); }
+
         function addToCart(index) {
             const product = allProducts[index];
             const type = document.getElementById(`type-${index}`).value;
@@ -670,8 +678,7 @@
                 adet: qty, toplamFiyat: unitPrice * qty
             });
 
-            saveCartToMemory();
-            updateCartUI();
+            saveCartToMemory(); updateCartUI();
             M.toast({html: '<i class="material-icons left">check_circle</i> Ürün sepete eklendi!', classes: 'green darken-1 rounded'});
         }
 
@@ -717,19 +724,12 @@
             } else { warningEl.style.display = 'none'; }
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            saveCartToMemory(); updateCartUI();
-        }
+        function removeFromCart(index) { cart.splice(index, 1); saveCartToMemory(); updateCartUI(); }
 
         function sendOrder(platform) {
             if(cart.length === 0) { M.toast({html: 'Sepetiniz boş!', classes: 'red rounded'}); return; }
-            
             let total = 0; cart.forEach(item => total += item.toplamFiyat);
-            if(total < 400) {
-                M.toast({html: '<i class="material-icons left">warning</i> Minimum sipariş 400 ₺ olmalıdır!', classes: 'red rounded', displayLength: 4000});
-                return;
-            }
+            if(total < 400) { M.toast({html: '<i class="material-icons left">warning</i> Minimum sipariş 400 ₺ olmalıdır!', classes: 'red rounded', displayLength: 4000}); return; }
 
             let message = "Merhaba Kale Fotokopi, yeni bir sipariş vermek istiyorum:%0A%0A";
             cart.forEach((item, i) => { message += `*${i+1}. [${item.kod || '-'}] ${item.ad}*%0A   - ${item.adet} Adet, ${item.tip}, ${item.cilt}%0A   - Tutar: ${item.toplamFiyat.toFixed(2)} TL%0A%0A`; });
@@ -742,80 +742,98 @@
             var instance = M.Modal.getInstance(document.getElementById('cart-modal')); instance.close();
         }
 
-        // KİTAP İSTEK FONKSİYONU
         function sendBookRequest() {
             let bookName = document.getElementById('requested-book-name').value;
-            if(!bookName || bookName.trim() === '') {
-                M.toast({html: 'Lütfen bir kitap adı yazın!', classes: 'red rounded'});
-                return;
-            }
-            
+            if(!bookName || bookName.trim() === '') { M.toast({html: 'Lütfen bir kitap adı yazın!', classes: 'red rounded'}); return; }
             let message = `Merhaba Kale Fotokopi, sitenizdeki katalogda bulamadığım şu kitap/ürün için istekte bulunmak istiyorum:%0A%0A*${bookName}*%0A%0ABu ürünü temin etme şansınız var mı?`;
             window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
-            
             document.getElementById('requested-book-name').value = '';
-            var instance = M.Modal.getInstance(document.getElementById('request-modal')); 
-            instance.close();
+            M.Modal.getInstance(document.getElementById('request-modal')).close();
         }
 
-        // YÖNETİCİ PANELİ
+        // ==========================================
+        // YÜKSEK PERFORMANSLI YÖNETİCİ PANELİ (ARAMA VE SAYFALANDIRMALI)
+        // ==========================================
         function checkAdminPassword() {
             let pwd = prompt("Yönetici Şifrenizi Girin:");
             if (pwd === ADMIN_PASSWORD) {
-                renderAdminTable();
+                document.getElementById('adminSearchInput').value = '';
+                filterAdminTable();
                 var instance = M.Modal.getInstance(document.getElementById('admin-modal'));
                 instance.open();
             } else if(pwd !== null) { alert("Hatalı Şifre!"); }
         }
 
-        function updateAdminImagePreview(index) {
-            let inputUrl = document.getElementById(`adm-kapak-${index}`).value;
-            let imgEl = document.getElementById(`adm-preview-${index}`);
-            if(inputUrl && inputUrl.trim() !== '') { imgEl.src = inputUrl; } 
-            else { imgEl.src = NO_IMAGE_URL; }
+        function filterAdminTable() {
+            const query = document.getElementById('adminSearchInput').value.toLocaleLowerCase('tr-TR').trim();
+            adminFilteredData = allProducts.filter(p => {
+                const text = ((p.ad||'') + (p['kod adı']||'') + (p.marka||'') + (p.kategori||'')).toLocaleLowerCase('tr-TR');
+                return text.includes(query);
+            });
+            adminDisplayed = 0;
+            document.getElementById('admin-table-body').innerHTML = '';
+            loadMoreAdmin();
         }
 
-        function renderAdminTable() {
+        function loadMoreAdmin() {
             const tbody = document.getElementById('admin-table-body');
-            tbody.innerHTML = '';
+            const chunk = adminFilteredData.slice(adminDisplayed, adminDisplayed + adminPerPage);
             
-            allProducts.forEach((item, index) => {
+            let html = '';
+            chunk.forEach(item => {
+                const realIdx = allProducts.indexOf(item);
                 let imgUrl = item.kapak || NO_IMAGE_URL;
-                let html = `
-                <tr id="admin-row-${index}">
-                    <td><input type="text" id="adm-kod-${index}" value="${item['kod adı'] || ''}" onchange="allProducts[${index}]['kod adı']=this.value"></td>
-                    <td><input type="text" id="adm-kat-${index}" value="${item.kategori || ''}" onchange="allProducts[${index}].kategori=this.value"></td>
-                    <td><input type="text" id="adm-mar-${index}" value="${item.marka || ''}" onchange="allProducts[${index}].marka=this.value"></td>
-                    <td><input type="text" id="adm-alan-${index}" value="${item.alan || ''}" onchange="allProducts[${index}].alan=this.value"></td>
-                    <td><input type="text" id="adm-ad-${index}" value="${item.ad || ''}" onchange="allProducts[${index}].ad=this.value"></td>
-                    <td><input type="text" id="adm-fiyat-${index}" value="${item.fiyat || ''}" onchange="allProducts[${index}].fiyat=this.value"></td>
+                html += `
+                <tr id="admin-row-${realIdx}">
+                    <td><input type="text" value="${item['kod adı'] || ''}" onchange="allProducts[${realIdx}]['kod adı']=this.value"></td>
+                    <td><input type="text" value="${item.kategori || ''}" onchange="allProducts[${realIdx}].kategori=this.value"></td>
+                    <td><input type="text" value="${item.marka || ''}" onchange="allProducts[${realIdx}].marka=this.value"></td>
+                    <td><input type="text" value="${item.alan || ''}" onchange="allProducts[${realIdx}].alan=this.value"></td>
+                    <td><input type="text" value="${item.ad || ''}" onchange="allProducts[${realIdx}].ad=this.value"></td>
+                    <td><input type="text" value="${item.fiyat || ''}" onchange="allProducts[${realIdx}].fiyat=this.value"></td>
                     <td style="display:flex; align-items:center;">
-                        <input type="text" id="adm-kapak-${index}" value="${item.kapak || ''}" placeholder="Link yapıştır" oninput="updateAdminImagePreview(${index}); allProducts[${index}].kapak=this.value;" style="flex-grow:1;">
-                        <img id="adm-preview-${index}" src="${imgUrl}" class="admin-preview-img" alt="Önizleme">
+                        <input type="text" value="${item.kapak || ''}" placeholder="Link yapıştır" oninput="updateAdminImagePreview(${realIdx}, this.value)" style="flex-grow:1;">
+                        <img id="adm-preview-${realIdx}" src="${imgUrl}" class="admin-preview-img" alt="Önizleme">
                     </td>
-                    <td><a href="#!" class="btn-small red waves-effect" onclick="adminDeleteRow(${index})"><i class="material-icons">delete</i></a></td>
+                    <td><a href="#!" class="btn-small red waves-effect" onclick="adminDeleteRow(${realIdx})"><i class="material-icons">delete</i></a></td>
                 </tr>`;
-                tbody.insertAdjacentHTML('beforeend', html);
             });
+            
+            tbody.insertAdjacentHTML('beforeend', html);
+            adminDisplayed += chunk.length;
+            
+            if (adminDisplayed >= adminFilteredData.length) {
+                document.getElementById('admin-load-more-btn').style.display = 'none';
+            } else {
+                document.getElementById('admin-load-more-btn').style.display = 'inline-block';
+            }
+        }
+
+        function updateAdminImagePreview(realIdx, val) {
+            allProducts[realIdx].kapak = val;
+            let imgEl = document.getElementById(`adm-preview-${realIdx}`);
+            if(imgEl) { imgEl.src = (val && val.trim() !== '') ? val : NO_IMAGE_URL; }
         }
 
         function adminAddNewRow() {
             allProducts.unshift({
                 "kod adı": "YENİ-01", "ad": "Yeni Kitap Adı", "kapak": "", "fiyat": "0,00 ₺", "marka": "Yayınevi", "alan": "Genel", "kategori": "Soru Bankası"
             });
-            renderAdminTable();
-            M.toast({html: 'En üste yeni boş bir ürün satırı eklendi.', classes: 'green'});
+            document.getElementById('adminSearchInput').value = '';
+            filterAdminTable();
+            M.toast({html: 'Yeni ürün en üste eklendi.', classes: 'green'});
             document.getElementById('admin-modal').querySelector('.modal-content').scrollTop = 0;
         }
 
-        function adminDeleteRow(index) {
+        function adminDeleteRow(realIdx) {
             if(confirm("Bu ürünü tamamen silmek istediğinize emin misiniz?")) {
-                allProducts.splice(index, 1);
-                renderAdminTable();
+                allProducts.splice(realIdx, 1);
+                filterAdminTable();
                 M.toast({html: 'Ürün silindi.', classes: 'red'});
             }
         }
 
+        // Anlık değişen veriler otomatik allProducts dizisine işlendiği için artık direkt indirebiliriz.
         function saveAndDownloadCSV() {
             var csv = Papa.unparse(allProducts, { columns: ["kod adı", "ad", "kapak", "fiyat", "marka", "alan", "kategori"] });
             var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
