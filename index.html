@@ -16,45 +16,72 @@
         body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Poppins', sans-serif; display: flex; min-height: 100vh; flex-direction: column; scroll-behavior: smooth; transition: background-color 0.3s, color 0.3s; }
         main { flex: 1 0 auto; }
         
-        /* Sabit Menü */
+        /* Sabit Üst Alan */
         .sticky-header { position: sticky; top: 0; z-index: 1000; background-color: var(--bg-color); padding-bottom: 10px; margin-top: -10px; padding-top: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); transition: background-color 0.3s; }
         nav { background-color: var(--nav-bg) !important; box-shadow: 0 4px 12px rgba(0,0,0,0.1); transition: background-color 0.3s; }
         .brand-logo { font-weight: 700; font-size: 1.8rem; padding-left: 20px !important; letter-spacing: 1px;}
         
-        /* Arama Kutusu */
-        .search-container { background: var(--card-bg); border-radius: 30px; padding: 5px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; }
-        .search-container:focus-within { box-shadow: 0 6px 20px rgba(21, 101, 192, 0.2); transform: scale(1.01); }
-        .search-container input { border: none !important; box-shadow: none !important; margin-bottom: 0 !important; font-size: 1.1rem; color: var(--text-color) !important; }
+        /* Arama & Sıralama Kutuları (Eşitlenmiş ve Hizalanmış) */
+        .search-container, .sort-container { 
+            background: var(--card-bg); 
+            border-radius: 30px; 
+            padding: 0 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08); 
+            transition: all 0.3s ease; 
+            height: 50px; 
+            display: flex; 
+            align-items: center; 
+            width: 100%; 
+        }
+        .search-container:focus-within, .sort-container:focus-within { box-shadow: 0 6px 20px rgba(21, 101, 192, 0.2); transform: scale(1.01); }
+        .search-container input { border: none !important; box-shadow: none !important; margin-bottom: 0 !important; font-size: 1.1rem; color: var(--text-color) !important; height: 100% !important; }
         
-        /* Sıralama Kutusu */
-        .sort-container { background: var(--card-bg); border-radius: 30px; padding: 0 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        
+        select.browser-default { 
+            width: 100%; border: none; background: transparent; color: var(--text-color); outline: none; cursor: pointer; font-size: 1rem; padding: 0; font-family: 'Poppins', sans-serif;
+        }
+        body.dark-mode select.browser-default option { background-color: #333; color: #e0e0e0; }
+
+        /* Turuncu İstek Butonu Düzeltmesi */
+        .request-btn {
+            height: auto !important;
+            padding: 15px 20px !important;
+            line-height: 1.4 !important;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            font-weight: bold;
+            width: 100%;
+            max-width: 600px;
+        }
+        .request-btn span { white-space: normal; text-align: center; font-size: 1rem; }
+
+        /* KPSS Sayaçları */
+        .countdown-container { background: var(--card-bg); padding: 15px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; margin-top: 15px; transition: background-color 0.3s; }
+        .countdown-card { text-align: center; padding: 10px; background: #f1f8ff; border-radius: 12px; margin-bottom: 10px; border: 1px solid #d0e8ff; transition: 0.3s; }
+        body.dark-mode .countdown-card { background: #1a237e; border-color: #283593; }
+        .exam-name { font-weight: 700; color: #1565c0; font-size: 1rem; }
+        body.dark-mode .exam-name { color: #bbdefb; }
+        .exam-date { font-size: 0.75rem; color: #757575; margin-bottom: 5px; }
+        body.dark-mode .exam-date { color: #90a4ae; }
+        .timer { display: flex; justify-content: center; gap: 5px; }
+        .time-box { background: #1565c0; color: white; padding: 4px; border-radius: 6px; min-width: 42px; display: flex; flex-direction: column; align-items: center; }
+        .time-box span { font-weight: 700; font-size: 1.1rem; line-height: 1; }
+        .time-box small { font-size: 0.55rem; opacity: 0.8; text-transform: uppercase; }
+
         /* Filtreler */
-        .filter-section { background: var(--card-bg); padding: 15px 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 20px; transition: background-color 0.3s; }
+        .filter-section { background: var(--card-bg); padding: 15px 20px; border-radius: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); margin-bottom: 5px; transition: background-color 0.3s; }
         .filter-title { font-weight: 600; color: #757575; font-size: 0.9rem; text-transform: uppercase; margin-bottom: 10px; display: block; }
         .chip.filter-chip { cursor: pointer; transition: 0.3s; background-color: #e3f2fd; color: #1565c0; font-weight: 500; margin-bottom: 8px;}
         .chip.filter-chip:hover, .chip.filter-chip.active { background-color: #1565c0; color: white; box-shadow: 0 4px 8px rgba(21,101,192,0.4); transform: translateY(-2px); }
         body.dark-mode .chip.filter-chip { background-color: #333; color: #90caf9; }
         body.dark-mode .chip.filter-chip.active { background-color: #1976d2; color: #fff; }
-        
-        /* Sayaçlar */
-        .countdown-container { background: var(--card-bg); padding: 20px 20px 5px 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 20px; margin-top: 10px; transition: background-color 0.3s; }
-        .countdown-card { text-align: center; padding: 15px 10px; background: #f1f8ff; border-radius: 12px; margin-bottom: 15px; border: 1px solid #bbdefb; transition: all 0.3s ease; }
-        body.dark-mode .countdown-card { background: #263238; border-color: #37474f; }
-        .countdown-card:hover { transform: translateY(-3px); box-shadow: 0 5px 10px rgba(21, 101, 192, 0.2); }
-        .exam-name { font-weight: 700; color: #1565c0; font-size: 1.1rem; }
-        body.dark-mode .exam-name { color: #90caf9; }
-        .exam-date { font-size: 0.8rem; color: #757575; margin-bottom: 10px; font-weight: 500; }
-        body.dark-mode .exam-date { color: #b0bec5; }
-        .timer { display: flex; justify-content: center; gap: 8px; }
-        .time-box { background: #1565c0; color: white; padding: 5px; border-radius: 8px; min-width: 48px; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        body.dark-mode .time-box { background: #0d47a1; }
-        .time-box span { font-weight: 700; font-size: 1.2rem; line-height: 1; margin-bottom: 3px; }
-        .time-box small { font-size: 0.65rem; opacity: 0.9; text-transform: uppercase; }
 
-        /* Ürün Kartları */
-        .product-card { background-color: var(--card-bg); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; border: none; height: 100%; display: flex; flex-direction: column; }
+        /* ÜRÜN KARTLARI VE EŞİT BOŞLUK AYARLARI */
+        .product-wrapper { padding: 15px !important; display: flex; } /* Her yönden 15px boşluk sağlar */
+        .product-card { background-color: var(--card-bg); border-radius: 15px; overflow: hidden; transition: all 0.3s ease; border: none; width: 100%; display: flex; flex-direction: column; margin: 0 !important; }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(0,0,0,0.15); }
+        
         .card-image { background: #e0e0e0; position: relative; padding-top: 15px; text-align: center; height: 260px; display: flex; align-items: center; justify-content: center;}
         body.dark-mode .card-image { background: #2c2c2c; }
         .card-image img { max-height: 230px; width: auto; max-width: 90%; object-fit: contain; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border-radius: 4px; transition: 0.3s; }
@@ -69,16 +96,13 @@
         .card-title { font-size: 1.1rem !important; font-weight: 600 !important; line-height: 1.4rem !important; color: var(--text-color); display: block; height: auto; min-height: 45px; margin-bottom: 10px; }
         .price-tag { font-size: 1.9rem; font-weight: 700; color: #4caf50; margin: 15px 0; display: inline-block; }
         
-        /* Form & Select Ayarları */
-        .input-field select { color: var(--text-color); font-weight: 500; }
+        .input-field select:not(.browser-default) { color: var(--text-color); font-weight: 500; }
         body.dark-mode .select-dropdown, body.dark-mode .dropdown-content { background-color: #333 !important; color: #e0e0e0 !important; }
         body.dark-mode .dropdown-content li>a, body.dark-mode .dropdown-content li>span { color: #90caf9 !important; }
         body.dark-mode input[type=number] { color: #e0e0e0; border-bottom: 1px solid #555; }
-        body.dark-mode input[type=text] { color: #e0e0e0; }
         
         .add-to-cart-btn { width: 100%; border-radius: 25px; font-weight: 600; letter-spacing: 0.5px; height: 45px; line-height: 45px; background: linear-gradient(45deg, #1565c0, #1976d2); transition: 0.3s; margin-top: auto;}
         .add-to-cart-btn:hover { background: linear-gradient(45deg, #0d47a1, #1565c0); box-shadow: 0 4px 12px rgba(13, 71, 161, 0.4); }
-        
         .share-btn { cursor: pointer; color: #9e9e9e; transition: 0.3s; margin-top: 5px; }
         .share-btn:hover { color: #1565c0; transform: scale(1.1); }
         
@@ -102,7 +126,7 @@
         .contact-info li { margin-bottom: 10px; display: flex; align-items: center; }
         .contact-info i { margin-right: 10px; color: #90caf9; }
         
-        /* Eski Net Bilgilendirme Ekranı Ayarları */
+        /* Eski Efsane Bilgilendirme Ekranı */
         #info-modal { border-radius: 15px; width: 90% !important; max-width: 600px; }
         #info-modal h5 { font-weight: bold; color: #1565c0; padding-bottom: 10px; }
         body.dark-mode #info-modal h5 { color: #90caf9; }
@@ -119,18 +143,12 @@
         @media only screen and (max-width: 600px) {
             .brand-logo { font-size: 1.4rem !important; padding-left: 10px !important; }
             .sticky-header { padding-top: 5px; padding-bottom: 5px; }
-            .search-container { padding: 2px 15px; }
-            .search-container input { font-size: 0.95rem !important; }
             .card-title { font-size: 1rem !important; line-height: 1.3rem !important; }
             .price-tag { font-size: 1.6rem; }
             .card-content { padding: 15px; }
             .time-box { min-width: 40px; padding: 4px; }
             .time-box span { font-size: 1.1rem; }
             .exam-name { font-size: 0.95rem; }
-            
-            .btn-large.request-btn { height: auto; line-height: normal; padding: 12px 15px; display: flex; align-items: center; justify-content: center; }
-            .request-btn-text { font-size: 0.9rem; white-space: normal; text-align: left; }
-            .request-btn i { margin-right: 10px !important; }
         }
     </style>
 </head>
@@ -148,18 +166,17 @@
 
     <div class="sticky-header">
         <div class="container">
-            <div class="row" style="margin-bottom: 0;">
-                <div class="col s12 m8">
-                    <div class="search-container d-flex align-items-center">
-                        <div class="input-field" style="margin: 0; display: flex; align-items: center; width:100%;">
-                            <i class="material-icons" style="color: #1565c0; margin-right: 10px; font-size:1.8rem;">search</i>
-                            <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Kitap, yazar, marka veya kod ara..." style="border-bottom: none; width: 100%;">
-                        </div>
+            <div class="row" style="margin-bottom: 0; display: flex; flex-wrap: wrap;">
+                <div class="col s12 m6" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div class="search-container">
+                        <i class="material-icons" style="color: #1565c0; margin-right: 10px; font-size:1.8rem;">search</i>
+                        <input type="text" id="searchInput" onkeyup="filterProducts()" placeholder="Kitap veya marka ara...">
                     </div>
                 </div>
-                <div class="col s12 m4" style="margin-top: 5px;">
-                    <div class="input-field sort-container">
-                        <select id="sortSelect" onchange="filterProducts()" style="border:none;">
+                <div class="col s12 m6" style="padding-top: 5px; padding-bottom: 5px;">
+                    <div class="sort-container">
+                        <i class="material-icons" style="color: #1565c0; margin-right: 10px; font-size:1.8rem;">sort</i>
+                        <select id="sortSelect" onchange="filterProducts()" class="browser-default">
                             <option value="default" selected>Sıralama Seçiniz</option>
                             <option value="priceAsc">Fiyat: Düşükten Yükseğe</option>
                             <option value="priceDesc">Fiyat: Yüksekten Düşüğe</option>
@@ -223,14 +240,14 @@
 
         <div class="row" style="margin-top: 5px; margin-bottom: 0;">
             <div class="col s12 center-align">
-                <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable request-btn" style="border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3); width: 100%; max-width: 500px;">
-                    <i class="material-icons left">menu_book</i>
-                    <span class="request-btn-text">Katalogda Bulamadığınız Kitapları<br class="hide-on-med-and-up"> Bize Buradan Sorun</span>
+                <a href="#request-modal" class="modal-trigger waves-effect waves-light orange darken-3 hoverable request-btn">
+                    <i class="material-icons left" style="margin-right: 10px;">menu_book</i>
+                    <span>BULAMADIĞINIZ KİTAPLARI BURADAN İSTEYİN</span>
                 </a>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" style="margin-bottom: 0;">
             <div class="col s12">
                 <div class="filter-section">
                     <span class="filter-title"><i class="material-icons left" style="font-size: 1rem; margin-top: 2px;">category</i> Kategoriler</span>
@@ -418,7 +435,7 @@
             var infoModal = M.Modal.init(document.getElementById('info-modal'), { dismissible: false });
             infoModal.open();
             
-            M.FormSelect.init(document.querySelectorAll('select'));
+            M.FormSelect.init(document.querySelectorAll('select:not(.browser-default)'));
             
             checkTheme();
             loadCartFromMemory();
@@ -445,7 +462,7 @@
 
         function updateTimer(prefix, targetDate, now) {
             const dist = targetDate - now;
-            if (dist < 0) return; // Sınav geçtiyse sıfırda kalır
+            if (dist < 0) return; 
             
             document.getElementById(`${prefix}-d`).innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
             document.getElementById(`${prefix}-h`).innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
@@ -465,7 +482,7 @@
             let isDark = document.body.classList.contains('dark-mode');
             localStorage.setItem('kalefotokopi_theme', isDark ? 'dark' : 'light');
             document.getElementById('theme-icon').innerText = isDark ? 'brightness_7' : 'brightness_4';
-            M.FormSelect.init(document.querySelectorAll('select'));
+            M.FormSelect.init(document.querySelectorAll('select:not(.browser-default)'));
         }
 
         // CSV YÜKLEME
@@ -568,6 +585,7 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         }
 
+        // EŞİT BOŞLUKLU (PADDING) KUSURSUZ GRİD SİSTEMİ
         function renderProducts(data) {
             const list = document.getElementById('product-list');
             list.innerHTML = '';
@@ -586,8 +604,8 @@
                 if (!imageUrl || imageUrl.trim() === '') { imageUrl = NO_IMAGE_URL; }
 
                 const html = `
-                <div class="col s12 m6 l4" style="display: flex;">
-                    <div class="card product-card" style="width: 100%;">
+                <div class="col s12 m6 l4 product-wrapper">
+                    <div class="card product-card">
                         <div class="card-image">
                             <span class="badge-kategori">${item.kategori || 'Genel'}</span>
                             ${isNew ? '<span class="badge-yeni">YENİ</span>' : ''}
@@ -631,7 +649,7 @@
                 </div>`;
                 list.insertAdjacentHTML('beforeend', html);
             });
-            M.FormSelect.init(document.querySelectorAll('select'));
+            M.FormSelect.init(document.querySelectorAll('select:not(.browser-default)'));
         }
 
         // SEPET İŞLEMLERİ
