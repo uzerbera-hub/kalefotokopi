@@ -39,7 +39,7 @@
         .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column;}
         .product-code { font-size: 0.85rem; color: #757575; display: block; margin-bottom: 5px; }
         
-        /* KİTAP İSMİNİN KESİLMEMESİ İÇİN YAPILAN DÜZELTME */
+        /* KİTAP İSMİNİN KESİLMEMESİ İÇİN DÜZELTME */
         .card-title { font-size: 1.1rem !important; font-weight: 600 !important; line-height: 1.4rem !important; color: #212121; display: block; height: auto; min-height: 45px; margin-bottom: 10px; }
         
         .price-tag { font-size: 1.9rem; font-weight: 700; color: #2e7d32; margin: 15px 0; display: inline-block; }
@@ -102,7 +102,7 @@
         <div class="row" style="margin-top: 20px; margin-bottom: 0;">
             <div class="col s12 center-align">
                 <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable" style="border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3); width: 100%; max-width: 500px;">
-                    <i class="material-icons left">menu_book</i>Katalogda Bulamadığınız Kitapları Bize Sorun
+                    <i class="material-icons left">menu_book</i>Bulamadığınız Kitapları Buradan İsteyin
                 </a>
             </div>
         </div>
@@ -270,10 +270,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
     <script>
-        // --- WHATSAPP NUMARASI EKLENDİ ---
+        // İLETİŞİM NUMARALARI
         const WHATSAPP_NUMBER = "905313793527"; 
         const TELEGRAM_USERNAME = "kullaniciadiniz"; 
         const ADMIN_PASSWORD = "1234"; 
+
+        // GÖRSEL HAZIRLANIYOR UYARISI (SVG FORMATINDA)
+        const NO_IMAGE_URL = `data:image/svg+xml;charset=UTF-8,` + encodeURIComponent(`<svg width="400" height="550" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="550" fill="#eeeeee"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#757575">GÖRSEL</text><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#757575">HAZIRLANIYOR</text></svg>`);
 
         let allProducts = [];
         let currentFilter = { kategori: '', marka: '' };
@@ -287,7 +290,6 @@
             loadCartFromMemory();
             loadCatalog();
             
-            // Yukarı çık butonu görünürlük ayarı
             window.addEventListener('scroll', function() {
                 var btn = document.getElementById('scroll-top-btn');
                 if (window.scrollY > 300) { btn.classList.add('visible'); } 
@@ -358,7 +360,7 @@
             renderProducts(filtered);
         }
 
-        // 4. EKRANA ÜRÜN ÇİZME VE HESAPLAMALAR
+        // 4. EKRANA ÜRÜN ÇİZME
         function parsePrice(priceStr) {
             if(!priceStr) return 0;
             return parseFloat(priceStr.replace('₺', '').replace('.', '').replace(',', '.').trim());
@@ -391,9 +393,10 @@
                 const realIndex = allProducts.findIndex(p => p === item);
                 const basePrice = parsePrice(item.fiyat);
                 
+                // GÖRSEL HAZIRLANIYOR UYARISI
                 let imageUrl = item.kapak;
                 if (!imageUrl || imageUrl.trim() === '') {
-                    imageUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(item.kategori || 'Kitap')}&background=0d47a1&color=fff&size=512&font-size=0.3&length=4`;
+                    imageUrl = NO_IMAGE_URL;
                 }
 
                 const html = `
@@ -531,7 +534,7 @@
             var instance = M.Modal.getInstance(document.getElementById('cart-modal')); instance.close();
         }
 
-        // 6. YENİ: KİTAP İSTEK FONKSİYONU
+        // 6. KİTAP İSTEK FONKSİYONU
         function sendBookRequest() {
             let bookName = document.getElementById('requested-book-name').value;
             if(!bookName || bookName.trim() === '') {
@@ -562,14 +565,13 @@
             }
         }
 
-        // Admin Panelinde resim linki yapıştırıldığında anında resmi gösterir
         function updateAdminImagePreview(index) {
             let inputUrl = document.getElementById(`adm-kapak-${index}`).value;
             let imgEl = document.getElementById(`adm-preview-${index}`);
             if(inputUrl && inputUrl.trim() !== '') {
                 imgEl.src = inputUrl;
             } else {
-                imgEl.src = "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2240%22%20height%3D%2250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2240%22%20height%3D%2250%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E";
+                imgEl.src = NO_IMAGE_URL;
             }
         }
 
@@ -578,7 +580,7 @@
             tbody.innerHTML = '';
             
             allProducts.forEach((item, index) => {
-                let imgUrl = item.kapak || "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2240%22%20height%3D%2250%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Crect%20width%3D%2240%22%20height%3D%2250%22%20fill%3D%22%23cccccc%22%2F%3E%3C%2Fsvg%3E";
+                let imgUrl = item.kapak || NO_IMAGE_URL;
                 
                 let html = `
                 <tr id="admin-row-${index}">
@@ -632,7 +634,6 @@
                 item.kategori = document.getElementById(`adm-kat-${index}`).value;
             });
 
-            // "alan" sütununu da ekleyerek CSV oluştur (Veri kaybını önler)
             var csv = Papa.unparse(allProducts, {
                 columns: ["kod adı", "ad", "kapak", "fiyat", "marka", "alan", "kategori"]
             });
