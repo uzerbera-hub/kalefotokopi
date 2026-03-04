@@ -157,6 +157,10 @@
             .search-container input { font-size: 0.95rem !important; }
             .time-box { min-width: 40px; padding: 4px; }
             .time-box span { font-size: 1.1rem; }
+            
+            /* TURUNCU BUTON MOBİL DÜZELTMESİ (YAZI KÜÇÜLÜR, KESİLMEZ) */
+            .custom-request-btn { padding: 0 5px !important; font-size: 0.75rem !important; }
+            .custom-request-btn i { margin-right: 5px !important; font-size: 1.2rem !important; }
         }
     </style>
 </head>
@@ -174,7 +178,7 @@
             
             <ul class="right desktop-menu">
                 <li><a href="#!" onclick="switchTab('store')"><i class="material-icons">store</i>Mağaza</a></li>
-                <li><a href="#!" onclick="switchTab('planner')"><i class="material-icons">event_note</i>Çalışma Programı</a></li>
+                <li><a href="#!" onclick="switchTab('planner')"><i class="material-icons">event_note</i>Program</a></li>
                 <li><a href="#!" onclick="switchTab('pomodoro')"><i class="material-icons">timer</i>Pomodoro</a></li>
                 <li><a href="#!" onclick="switchTab('favorites')"><i class="material-icons">favorite</i>Favoriler</a></li>
                 <li><a href="#!" onclick="toggleTheme()" title="Gece/Gündüz Modu"><i class="material-icons" id="theme-icon-desk">brightness_4</i></a></li>
@@ -283,8 +287,8 @@
 
             <div class="row" style="margin-top: 5px; margin-bottom: 0;">
                 <div class="col s12 center-align">
-                    <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable" style="border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3); width: 100%; max-width: 500px;">
-                        <i class="material-icons left">menu_book</i>KATALOGDA OLMAYAN KİTABI İSTE
+                    <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable custom-request-btn" style="border-radius: 30px; font-weight: bold; width: 100%; max-width: 500px; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3);">
+                        <i class="material-icons left">menu_book</i>BULAMADIĞINIZ KİTAPLARI BURADAN İSTEYİN
                     </a>
                 </div>
             </div>
@@ -308,7 +312,7 @@
             <div class="row" id="product-list" style="display: flex; flex-wrap: wrap;">
                 <div class="col s12 center-align" style="margin-top: 50px; width: 100%;">
                     <div class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>
-                    <p style="font-weight: 500; color:#555; margin-top:20px;">Mağaza Hazırlanıyor...</p>
+                    <p style="font-weight: 500; color:#555; margin-top:20px;">Katalog Yükleniyor...</p>
                 </div>
             </div>
 
@@ -363,13 +367,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><textarea id="plan-1" placeholder="Konu, test, hedef..."></textarea></td>
-                            <td><textarea id="plan-2" placeholder="Konu, test, hedef..."></textarea></td>
-                            <td><textarea id="plan-3" placeholder="Konu, test, hedef..."></textarea></td>
-                            <td><textarea id="plan-4" placeholder="Konu, test, hedef..."></textarea></td>
-                            <td><textarea id="plan-5" placeholder="Konu, test, hedef..."></textarea></td>
-                            <td><textarea id="plan-6" placeholder="Deneme, tekrar..."></textarea></td>
-                            <td><textarea id="plan-7" placeholder="Dinlenme, analiz..."></textarea></td>
+                            <td><textarea id="plan-1" placeholder="Hedef..."></textarea></td>
+                            <td><textarea id="plan-2" placeholder="Hedef..."></textarea></td>
+                            <td><textarea id="plan-3" placeholder="Hedef..."></textarea></td>
+                            <td><textarea id="plan-4" placeholder="Hedef..."></textarea></td>
+                            <td><textarea id="plan-5" placeholder="Hedef..."></textarea></td>
+                            <td><textarea id="plan-6" placeholder="Deneme..."></textarea></td>
+                            <td><textarea id="plan-7" placeholder="Dinlenme..."></textarea></td>
                         </tr>
                     </tbody>
                 </table>
@@ -378,7 +382,6 @@
                     <button class="btn blue darken-2" onclick="savePlanner()" style="border-radius:20px; margin-left:10px;"><i class="material-icons left">save</i>Kaydet</button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -387,7 +390,7 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text" style="font-weight:700;"><i class="material-icons left" style="font-size:2rem;">local_library</i>Kale Fotokopi</h5>
-                    <p class="grey-text text-lighten-4">Ders notları, soru bankaları ve tüm fotokopi ihtiyaçlarınız için kaliteli, hızlı ve güvenilir hizmetin adresi.</p>
+                    <p class="grey-text text-lighten-4">Tüm fotokopi ihtiyaçlarınız için kaliteli, hızlı ve güvenilir hizmetin adresi.</p>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="footer-title">İletişim & Destek</h5>
@@ -540,9 +543,12 @@
             infoModal.open();
             
             checkTheme();
-            loadCartFromMemory();
-            loadFavsFromMemory(); 
-            loadPlanner(); 
+            
+            // Güvenli (Hata Yakalayıcı) Hafıza Yüklemeleri
+            try { loadCartFromMemory(); } catch(e){}
+            try { loadFavsFromMemory(); } catch(e){}
+            try { loadPlanner(); } catch(e){}
+            
             loadCatalog();
             
             setInterval(updateAllTimers, 1000);
@@ -697,7 +703,8 @@
                 M.toast({html: 'Program Temizlendi.', classes: 'grey'});
             }
         }
-        
+
+        // SAYAÇLAR
         const examDates = {
             lisans: new Date("September 6, 2026 10:15:00").getTime(),
             onlisans: new Date("October 4, 2026 10:15:00").getTime(),
@@ -720,6 +727,7 @@
             document.getElementById(`${prefix}-s`).innerText = Math.floor((dist % 60000) / 1000).toString().padStart(2, '0');
         }
 
+        // TEMA
         function checkTheme() {
             if(localStorage.getItem('kalefotokopi_theme') === 'dark') {
                 document.body.classList.add('dark-mode');
@@ -736,43 +744,51 @@
             M.FormSelect.init(document.querySelectorAll('select:not(.browser-default)'));
         }
 
+        // GÜVENLİ CSV YÜKLEME 
         function loadCatalog() {
-            Papa.parse("katalog.csv", {
+            Papa.parse("katalog.csv?v=" + new Date().getTime(), {
                 download: true, header: true, skipEmptyLines: true,
                 complete: function(results) {
-                    try {
+                    if(results.data && results.data.length > 0) {
                         allProducts = results.data;
                         generateFilters();
                         filterProducts();
-                    } catch(e) {
-                        document.getElementById('product-list').innerHTML = '<div class="col s12 center-align"><h5 class="red-text">Ürünler yüklenirken bir hata oluştu.</h5></div>';
+                    } else {
+                        document.getElementById('product-list').innerHTML = '<div class="col s12 center-align"><h5 class="red-text">katalog.csv dosyasının içi boş veya okunamadı!</h5></div>';
                     }
                 },
                 error: function(err) {
-                    // YENİ: Bilgisayardan çift tıklayarak açanlar için güvenlik uyarısı (Dönüp durma sorununu önler)
                     document.getElementById('product-list').innerHTML = `
                         <div class="col s12 center-align" style="margin-top:30px;">
-                            <i class="material-icons red-text" style="font-size: 4rem;">warning</i>
-                            <h5 class="grey-text text-darken-2">Katalog Yüklenemedi</h5>
-                            <p><b>Uyarı:</b> Eğer bu dosyayı bilgisayarınızda çift tıklayarak açtıysanız tarayıcılar güvenlik nedeniyle Excel dosyasını okumaya izin vermez.<br><br><b>Sitenin çalışması için lütfen bu kodları GitHub'a yükleyip oradan test edin.</b></p>
-                        </div>`;
+                            <i class="material-icons red-text" style="font-size: 4rem;">error_outline</i>
+                            <h5 class="red-text" style="font-weight:bold;">Katalog Dosyası Okunamadı!</h5>
+                            <div class="card-panel" style="text-align:left; background:var(--card-bg);">
+                                <p><b>Neden "Mağaza Hazırlanıyor" ekranında kaldınız?</b></p>
+                                <ol>
+                                    <li>Bu dosyayı bilgisayarınızda çift tıklayarak (yerel) açtınız. Tarayıcılar güvenlik nedeniyle yerel dosyaların veri okumasını engeller. Lütfen kodları <b>GitHub'a yükleyip</b> internet üzerinden siteye girin.</li>
+                                    <li>Excel dosyanızın adı tam olarak <b>katalog.csv</b> değil.</li>
+                                </ol>
+                            </div>
+                        </div>
+                    `;
                 }
             });
         }
 
+        // FİLTRELER VE ARAMA
         function generateFilters() {
             const cats = new Set(); const brands = new Set();
             allProducts.forEach(p => {
-                if(p.kategori && p.kategori.trim() !== '') categories.add(p.kategori.trim());
+                if(p.kategori && p.kategori.trim() !== '') cats.add(p.kategori.trim());
                 if(p.marka && p.marka.trim() !== '') brands.add(p.marka.trim());
             });
             const catC = document.getElementById('category-filters');
             catC.innerHTML = `<div class="chip filter-chip active" onclick="applyFilter('kategori', '', this)">Tümü</div>`;
-            categories.forEach(c => catC.innerHTML += `<div class="chip filter-chip" onclick="applyFilter('kategori', '${c}', this)">${c}</div>`);
+            cats.forEach(c => catC.innerHTML += `<div class="chip filter-chip cat-chip" onclick="applyFilter('kategori', '${c}', this)">${c}</div>`);
 
             const brC = document.getElementById('brand-filters');
             brC.innerHTML = `<div class="chip filter-chip active" onclick="applyFilter('marka', '', this)">Tümü</div>`;
-            brands.forEach(b => brC.innerHTML += `<div class="chip filter-chip" onclick="applyFilter('marka', '${b}', this)">${b}</div>`);
+            brands.forEach(b => brC.innerHTML += `<div class="chip filter-chip brand-chip" onclick="applyFilter('marka', '${b}', this)">${b}</div>`);
         }
 
         function applyFilter(type, value, element) {
@@ -895,6 +911,11 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         }
 
+        function loadCartFromMemory() { 
+            let s = localStorage.getItem('kalefotokopi_sepet'); 
+            if(s) { cart = JSON.parse(s); updateCartUI(); } 
+        }
+        function saveCartToMemory() { localStorage.setItem('kalefotokopi_sepet', JSON.stringify(cart)); }
         function openCartModal() { M.Modal.getInstance(document.getElementById('cart-modal')).open(); }
 
         function addToCart(index) {
