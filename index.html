@@ -29,20 +29,23 @@
         .chip.filter-chip:hover, .chip.filter-chip.active { background-color: #1565c0; color: white; box-shadow: 0 4px 8px rgba(21,101,192,0.4); transform: translateY(-2px); }
         
         /* Ürün Kartları */
-        .product-card { border-radius: 15px; overflow: hidden; transition: all 0.3s ease; border: none; }
+        .product-card { border-radius: 15px; overflow: hidden; transition: all 0.3s ease; border: none; height: 100%; display: flex; flex-direction: column; }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 25px rgba(0,0,0,0.15); }
         .card-image { background: #e0e0e0; position: relative; padding-top: 15px; text-align: center; height: 260px; display: flex; align-items: center; justify-content: center;}
         .card-image img { max-height: 230px; width: auto; max-width: 90%; object-fit: contain; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border-radius: 4px; transition: 0.3s; }
         .product-card:hover .card-image img { transform: scale(1.05); }
         
         .badge-kategori { position: absolute; top: 12px; left: 12px; background: #ff9800; color: #fff; padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 10;}
-        .card-content { padding: 20px; }
+        .card-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column;}
         .product-code { font-size: 0.85rem; color: #757575; display: block; margin-bottom: 5px; }
-        .card-title { font-size: 1.15rem !important; font-weight: 600 !important; line-height: 1.5rem !important; color: #212121; height: 50px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        
+        /* KİTAP İSMİNİN KESİLMEMESİ İÇİN YAPILAN DÜZELTME */
+        .card-title { font-size: 1.1rem !important; font-weight: 600 !important; line-height: 1.4rem !important; color: #212121; display: block; height: auto; min-height: 45px; margin-bottom: 10px; }
+        
         .price-tag { font-size: 1.9rem; font-weight: 700; color: #2e7d32; margin: 15px 0; display: inline-block; }
         
         .input-field select { color: #424242; font-weight: 500; }
-        .add-to-cart-btn { width: 100%; border-radius: 25px; font-weight: 600; letter-spacing: 0.5px; height: 45px; line-height: 45px; background: linear-gradient(45deg, #1565c0, #1976d2); transition: 0.3s; }
+        .add-to-cart-btn { width: 100%; border-radius: 25px; font-weight: 600; letter-spacing: 0.5px; height: 45px; line-height: 45px; background: linear-gradient(45deg, #1565c0, #1976d2); transition: 0.3s; margin-top: auto;}
         .add-to-cart-btn:hover { background: linear-gradient(45deg, #0d47a1, #1565c0); box-shadow: 0 4px 12px rgba(13, 71, 161, 0.4); }
         
         /* Yüzen Butonlar (Sepet ve Yukarı Çık) */
@@ -95,6 +98,15 @@
     </div>
 
     <main class="container">
+        
+        <div class="row" style="margin-top: 20px; margin-bottom: 0;">
+            <div class="col s12 center-align">
+                <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable" style="border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3); width: 100%; max-width: 500px;">
+                    <i class="material-icons left">menu_book</i>Katalogda Bulamadığınız Kitapları Bize Sorun
+                </a>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col s12">
                 <div class="filter-section">
@@ -111,8 +123,8 @@
             </div>
         </div>
 
-        <div class="row" id="product-list">
-            <div class="center-align" style="margin-top: 50px;">
+        <div class="row" id="product-list" style="display: flex; flex-wrap: wrap;">
+            <div class="col s12 center-align" style="margin-top: 50px; width: 100%;">
                 <div class="preloader-wrapper big active">
                     <div class="spinner-layer spinner-blue-only">
                         <div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div>
@@ -133,7 +145,7 @@
                 <div class="col l4 offset-l2 s12">
                     <h5 class="footer-title">İletişim & Destek</h5>
                     <ul class="contact-info">
-                        <li><i class="material-icons">phone</i> 0500 000 00 00</li>
+                        <li><i class="material-icons">phone</i> 0531 379 35 27</li>
                         <li><i class="material-icons">chat</i> WhatsApp Canlı Destek</li>
                         <li><i class="material-icons">location_on</i> Çanakkale Merkez</li>
                         <li style="margin-top: 20px;">
@@ -160,6 +172,23 @@
         <a class="btn-floating btn-large waves-effect waves-light pulse" id="floating-cart-btn">
             <i class="material-icons">shopping_cart</i>
         </a>
+    </div>
+
+    <div id="request-modal" class="modal" style="border-radius: 15px; max-width: 500px;">
+        <div class="modal-content">
+            <h4 class="orange-text text-darken-3" style="font-weight: bold;"><i class="material-icons left" style="font-size: 2rem;">find_in_page</i>Kitap İsteği</h4>
+            <p>Aradığınız kitabı katalogda bulamadınız mı? Kitabın ve yayınevinin adını aşağıya yazın, size temin edip edemeyeceğimizi WhatsApp üzerinden hemen bildirelim.</p>
+            <div class="input-field" style="margin-top: 20px;">
+                <input type="text" id="requested-book-name" placeholder="Örn: 2026 KPSS ALES Matematik Soru Bankası Benim Hocam">
+                <label for="requested-book-name" class="active">İstediğiniz Kitabın Adı / Yayınevi</label>
+            </div>
+        </div>
+        <div class="modal-footer" style="padding: 0 24px 20px 24px; text-align: center;">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat" style="margin-right: 10px;">İptal</a>
+            <button class="waves-effect waves-light btn green darken-1" style="border-radius: 20px; font-weight: bold;" onclick="sendBookRequest()">
+                <i class="material-icons left">chat</i>WhatsApp'tan Sor
+            </button>
+        </div>
     </div>
 
     <div id="info-modal" class="modal" style="border-radius: 15px;">
@@ -241,8 +270,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 
     <script>
-        // --- İLETİŞİM VE ŞİFRE BİLGİLERİ (BURAYI KENDİNE GÖRE DÜZENLE) ---
-        const WHATSAPP_NUMBER = "905000000000"; 
+        // --- WHATSAPP NUMARASI EKLENDİ ---
+        const WHATSAPP_NUMBER = "905313793527"; 
         const TELEGRAM_USERNAME = "kullaniciadiniz"; 
         const ADMIN_PASSWORD = "1234"; 
 
@@ -368,8 +397,8 @@
                 }
 
                 const html = `
-                <div class="col s12 m6 l4">
-                    <div class="card product-card">
+                <div class="col s12 m6 l4" style="display: flex;">
+                    <div class="card product-card" style="width: 100%;">
                         <div class="card-image">
                             <span class="badge-kategori">${item.kategori || 'Genel'}</span>
                             <img src="${imageUrl}" alt="${item.ad}">
@@ -500,6 +529,23 @@
             
             cart = []; saveCartToMemory(); updateCartUI();
             var instance = M.Modal.getInstance(document.getElementById('cart-modal')); instance.close();
+        }
+
+        // 6. YENİ: KİTAP İSTEK FONKSİYONU
+        function sendBookRequest() {
+            let bookName = document.getElementById('requested-book-name').value;
+            if(!bookName || bookName.trim() === '') {
+                M.toast({html: 'Lütfen bir kitap adı yazın!', classes: 'red rounded'});
+                return;
+            }
+            
+            let message = `Merhaba Kale Fotokopi, sitenizdeki katalogda bulamadığım şu kitap/ürün için istekte bulunmak istiyorum:%0A%0A*${bookName}*%0A%0ABu ürünü temin etme şansınız var mı?`;
+            
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+            
+            document.getElementById('requested-book-name').value = '';
+            var instance = M.Modal.getInstance(document.getElementById('request-modal')); 
+            instance.close();
         }
 
         // ==========================================
