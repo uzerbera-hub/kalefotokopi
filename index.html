@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kale Fotokopi - Ürün Kataloğu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body { background-color: #f5f5f5; display: flex; min-height: 100vh; flex-direction: column; }
+        main { flex: 1 0 auto; }
+        .brand-logo { padding-left: 20px !important; font-weight: bold; }
+        .card-content { padding: 16px; }
+        .price-tag { font-size: 1.5rem; font-weight: bold; color: #2e7d32; }
+        .product-code { font-size: 0.8rem; color: #9e9e9e; }
+        #cart-btn { position: fixed; bottom: 30px; right: 30px; z-index: 999; }
+        .cart-item { border-bottom: 1px solid #e0e0e0; padding: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <nav class="blue darken-3">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Kale Fotokopi</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="#cart-modal" class="modal-trigger"><i class="material-icons left">shopping_cart</i>Sepetim (<span id="cart-count-nav">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="row" style="margin-top: 20px;">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="searchInput" onkeyup="filterProducts()">
+                <label for="searchInput">Ürün Adı, Marka veya Kategori Ara...</label>
+            </div>
+        </div>
+
+        <div class="row" id="product-list">
+            <div class="center-align" style="margin-top: 50px;">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-blue-only">
+                        <div class="circle-clipper left"><div class="circle"></div></div>
+                        <div class="gap-patch"><div class="circle"></div></div>
+                        <div class="circle-clipper right"><div class="circle"></div></div>
+                    </div>
+                </div>
+                <p>Katalog Yükleniyor...</p>
+            </div>
+        </div>
+    </main>
+
+    <a href="#cart-modal" id="cart-btn" class="btn-floating btn-large red modal-trigger pulse">
+        <i class="large material-icons">shopping_cart</i>
+    </a>
+
+    <div id="cart-modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Sepetim</h4>
+            <div id="cart-items">
+                <p class="grey-text">Sepetiniz şu an boş.</p>
+            </div>
+            <h5 class="right-align" style="margin-top: 20px;">Toplam: <span id="cart-total">0.00</span> ₺</h5>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Kapat</a>
+            <button class="waves-effect waves-light btn green darken-1" onclick="sendOrder('whatsapp')">
+                <i class="material-icons left">chat</i>WhatsApp'tan Sipariş Ver
+            </button>
+            <button class="waves-effect waves-light btn blue darken-1" onclick="sendOrder('telegram')">
+                <i class="material-icons left">send</i>Telegram'dan Sipariş Ver
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+
+    <script>
+        // İletişim Bilgileri (Buraya kendi numaralarını yazmalısın)
+        const WHATSAPP_NUMBER = "905000000000"; // Başında + olmadan ülke koduyla
+        const TELEGRAM_USERNAME = "kullaniciadiniz"; // Başında @ olmadan
+
+        let products = [];
+        let cart = [];
+
+        // Sayfa yüklendiğinde
+        document.addEventListener('DOMContentLoaded', function() {
+            M.Modal.init(document.querySelectorAll('.modal'));
+            M.FormSelect.init(document.querySelectorAll('select'));
+            loadCatalog();
+        });
+
+        // CSV'yi yükle ve parse et
+        function loadCatalog() {
+            Papa.parse("katalog.csv", {
+                download: true,
+                header: true,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    products = results.data;
+                    renderProducts(products);
+                }
+            });
+        }
+
+        // Fiyat metnini (örn: "40,33 ₺") sayıya çevir
+        function parsePrice(priceStr) {
+            if(!priceStr) return 0;
+            return parseFloat(priceStr.replace('₺', '').replace('.', '').replace(',', '.').trim());
+        }
+
+        // Ürünleri ekrana bas
+        function renderProducts(data) {
+            const list = document.getElementById('product-list');
+            list.innerHTML = '';
+
+            data.forEach((item, index) => {
+                const price = parsePrice(item.fiyat);
+                const html = `
+                <div class="col s12 m6 l4 product-card">
+                    <div class="card hoverable">
+                        <div class="card-content">
+                            <span class="product-code">${item['kod adı']} | ${item.marka} | ${item.kategori}</span>
+                            <span class="card-title" style="font-size: 1.1rem; line-height: 1.3rem; margin-top: 8px;">${item.ad}</span>
+                            <p class="price-tag">${price.toFixed(2)} ₺</p>
+                            
+                            <div class="row" style="margin-bottom: 0; margin-top: 15px;">
+                                <div class="input-field col s6">
+                                    <select id="type-${index}">
+                                        <option value="yatay" selected>Yatay</option>
+                                        <option value="dikey">Dikey (Fiyat x2)</option>
+                                    </select>
+                                    <label>Basım Yönü</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input id="qty-${index}" type="number" min="1" value="1">
+                                    <label for="qty-${index}" class="active">Adet</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-action center-align">
+                            <button class="btn blue darken-3 waves-effect waves-light" onclick="addToCart(${index})">
+                                <i class="material-icons left">add_shopping_cart</i>Sepete Ekle
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+                list.insertAdjacentHTML('beforeend', html);
+            });
+            // Select elemanlarını Materialize için yeniden başlat
+            M.FormSelect.init(document.querySelectorAll('select'));
+        }
+
+        // Arama fonksiyonu
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => {
+                return (p.ad && p.ad.toLowerCase().includes(query)) || 
+                       (p.marka && p.marka.toLowerCase().includes(query)) ||
+                       (p.kategori && p.kategori.toLowerCase().includes(query));
+            });
+            renderProducts(filtered);
+        }
+
+        // Sepete Ekle
+        function addToCart(index) {
+            const product = products[index];
+            const type = document.getElementById(`type-${index}`).value;
+            const qty = parseInt(document.getElementById(`qty-${index}`).value);
+            
+            let basePrice = parsePrice(product.fiyat);
+            let finalPrice = type === 'dikey' ? basePrice * 2 : basePrice;
+
+            cart.push({
+                kod: product['kod adı'],
+                ad: product.ad,
+                tip: type === 'dikey' ? 'Dikey' : 'Yatay',
+                adet: qty,
+                birimFiyat: finalPrice,
+                toplamFiyat: finalPrice * qty
+            });
+
+            M.toast({html: 'Ürün sepete eklendi!', classes: 'green'});
+            updateCartUI();
+        }
+
+        // Sepeti Güncelle
+        function updateCartUI() {
+            const cartDiv = document.getElementById('cart-items');
+            document.getElementById('cart-count-nav').innerText = cart.length;
+            
+            if(cart.length === 0) {
+                cartDiv.innerHTML = '<p class="grey-text">Sepetiniz şu an boş.</p>';
+                document.getElementById('cart-total').innerText = '0.00';
+                return;
+            }
+
+            let html = '';
+            let grandTotal = 0;
+
+            cart.forEach((item, index) => {
+                grandTotal += item.toplamFiyat;
+                html += `
+                <div class="cart-item">
+                    <div class="row" style="margin-bottom: 0;">
+                        <div class="col s10">
+                            <strong>${item.kod} - ${item.ad}</strong><br>
+                            ${item.adet} Adet | Seçim: ${item.tip} <br>
+                            <span class="green-text">${item.toplamFiyat.toFixed(2)} ₺</span>
+                        </div>
+                        <div class="col s2 right-align">
+                            <a href="#!" class="red-text" onclick="removeFromCart(${index})"><i class="material-icons">delete</i></a>
+                        </div>
+                    </div>
+                </div>`;
+            });
+
+            cartDiv.innerHTML = html;
+            document.getElementById('cart-total').innerText = grandTotal.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            M.toast({html: 'Ürün sepetten çıkarıldı', classes: 'red'});
+        }
+
+        // Sipariş Gönder (WhatsApp veya Telegram)
+        function sendOrder(platform) {
+            if(cart.length === 0) {
+                M.toast({html: 'Sepetiniz boş!', classes: 'red'});
+                return;
+            }
+
+            let message = "Merhaba Kale Fotokopi, yeni bir sipariş vermek istiyorum:%0A%0A";
+            let total = 0;
+
+            cart.forEach((item, i) => {
+                message += `${i+1}. [${item.kod}] ${item.ad}%0A   - ${item.adet} Adet, ${item.tip} Basım%0A   - Tutar: ${item.toplamFiyat.toFixed(2)} TL%0A%0A`;
+                total += item.toplamFiyat;
+            });
+
+            message += `------------------------%0A*Genel Toplam: ${total.toFixed(2)} TL*`;
+
+            if(platform === 'whatsapp') {
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+            } else if (platform === 'telegram') {
+                window.open(`https://t.me/${TELEGRAM_USERNAME}?text=${message}`, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
