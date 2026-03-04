@@ -87,16 +87,39 @@
         #admin-modal { width: 95% !important; max-height: 90% !important; height: 90% !important; border-radius: 15px; }
         .admin-table input { border-bottom: 1px solid var(--border-color) !important; margin-bottom: 0 !important; height: 2rem !important; font-size: 0.9rem !important; color: var(--text-color) !important;}
         .admin-preview-img { width: 40px; height: 50px; object-fit: cover; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); margin-left: 10px; vertical-align: middle; background-color:#eee; }
+
+        /* MOBİL UYUMLULUK (RESPONSIVE) CSS EKLENDİ */
+        @media only screen and (max-width: 600px) {
+            .brand-logo { font-size: 1.4rem !important; padding-left: 10px !important; }
+            .sticky-header { padding-top: 5px; padding-bottom: 5px; }
+            .search-container { padding: 2px 15px; }
+            .search-container input { font-size: 0.95rem !important; }
+            .card-title { font-size: 1rem !important; line-height: 1.3rem !important; }
+            .price-tag { font-size: 1.6rem; }
+            .card-content { padding: 15px; }
+            
+            /* Turuncu butonun içindeki metnin sığması için ayarlar */
+            .btn-large.request-btn { 
+                height: auto; 
+                line-height: normal; 
+                padding: 12px 15px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center; 
+            }
+            .request-btn-text { font-size: 0.9rem; white-space: normal; text-align: left; }
+            .request-btn i { margin-right: 10px !important; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo"><i class="material-icons left" style="font-size: 2.2rem; margin-top:2px;">local_library</i>Kale Fotokopi</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="#!" onclick="toggleTheme()" title="Temayı Değiştir"><i class="material-icons" id="theme-icon">brightness_4</i></a></li>
-                <li><a href="#cart-modal" class="modal-trigger"><i class="material-icons left">shopping_cart</i>Sepet</a></li>
+            <a href="#" class="brand-logo"><i class="material-icons left" style="font-size: 2rem; margin-top:5px;">local_library</i>Kale Fotokopi</a>
+            <ul id="nav-mobile" class="right">
+                <li><a href="#!" onclick="toggleTheme()" title="Gece/Gündüz Modu"><i class="material-icons" id="theme-icon">brightness_4</i></a></li>
+                <li><a href="#cart-modal" class="modal-trigger"><i class="material-icons left" style="margin-right: 0;">shopping_cart</i><span class="hide-on-small-only" style="margin-left: 5px;">Sepet</span></a></li>
             </ul>
         </div>
     </nav>
@@ -130,8 +153,9 @@
         
         <div class="row" style="margin-top: 10px; margin-bottom: 0;">
             <div class="col s12 center-align">
-                <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable" style="border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3); width: 100%; max-width: 500px;">
-                    <i class="material-icons left">menu_book</i>Bulamadığınız Kitapları Buradan İsteyin
+                <a href="#request-modal" class="modal-trigger waves-effect waves-light btn-large orange darken-3 hoverable request-btn" style="border-radius: 30px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 81, 0, 0.3); width: 100%; max-width: 500px;">
+                    <i class="material-icons left">menu_book</i>
+                    <span class="request-btn-text">Katalogda Bulamadığınız Kitapları<br class="hide-on-med-and-up"> Bize Buradan Sorun</span>
                 </a>
             </div>
         </div>
@@ -208,7 +232,7 @@
             <h4 class="orange-text text-darken-3" style="font-weight: bold;"><i class="material-icons left" style="font-size: 2rem;">find_in_page</i>Kitap İsteği</h4>
             <p>Aradığınız kitabı katalogda bulamadınız mı? Kitabın ve yayınevinin adını aşağıya yazın, size temin edip edemeyeceğimizi WhatsApp üzerinden hemen bildirelim.</p>
             <div class="input-field" style="margin-top: 20px;">
-                <input type="text" id="requested-book-name" placeholder="Örn: 2026 KPSS ALES Matematik Soru Bankası Benim Hocam">
+                <input type="text" id="requested-book-name" placeholder="Örn: 2026 KPSS Soru Bankası Benim Hocam">
                 <label for="requested-book-name" class="active">İstediğiniz Kitabın Adı / Yayınevi</label>
             </div>
         </div>
@@ -224,7 +248,7 @@
         <div class="modal-content">
             <h5 class="blue-text text-darken-3" style="font-weight: bold; text-align:center; margin-bottom: 20px;"><i class="material-icons" style="vertical-align: bottom; font-size:2rem;">info</i> GENEL BİLGİLENDİRME</h5>
             <div class="divider" style="margin-bottom:20px;"></div>
-            <ol style="font-size: 1.1rem; line-height: 1.8rem;">
+            <ol style="font-size: 1rem; line-height: 1.6rem; margin:0; padding-left:15px;">
                 <li>Sistem üzerinden verilecek siparişlerde <strong>minimum tutar 400 ₺</strong>'dir.</li>
                 <li>Kitapların fiyatları sayfada <strong>ikili zımbalı</strong> fiyatlarıdır.</li>
                 <li>İsteğe göre <strong>spiral</strong> yapılır. Spiral ücretimiz <strong>20 ₺</strong>'dir.</li>
@@ -342,7 +366,6 @@
             let isDark = document.body.classList.contains('dark-mode');
             localStorage.setItem('kalefotokopi_theme', isDark ? 'dark' : 'light');
             document.getElementById('theme-icon').innerText = isDark ? 'brightness_7' : 'brightness_4';
-            // Select menülerin renk düzeltmesi için yeniden başlatılması
             M.FormSelect.init(document.querySelectorAll('select'));
         }
 
@@ -355,7 +378,7 @@
                 complete: function(results) {
                     allProducts = results.data;
                     generateFilters();
-                    filterProducts(); // İlk yüklemede filtre ve sıralama çalışsın
+                    filterProducts();
                 }
             });
         }
@@ -410,7 +433,6 @@
                 return matchesSearch && matchesCategory && matchesBrand;
             });
 
-            // Sıralama İşlemi
             if (sortVal === 'priceAsc') {
                 filtered.sort((a, b) => parsePrice(a.fiyat) - parsePrice(b.fiyat));
             } else if (sortVal === 'priceDesc') {
@@ -459,7 +481,7 @@
             data.forEach((item) => {
                 const realIndex = allProducts.findIndex(p => p === item);
                 const basePrice = parsePrice(item.fiyat);
-                const isNew = item.ad && item.ad.includes("2026"); // 2026 içerenlere YENİ etiketi
+                const isNew = item.ad && item.ad.includes("2026");
                 
                 let imageUrl = item.kapak;
                 if (!imageUrl || imageUrl.trim() === '') { imageUrl = NO_IMAGE_URL; }
