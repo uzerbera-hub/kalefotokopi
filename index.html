@@ -168,7 +168,7 @@
 
     <div class="announcement-bar">
         <marquee behavior="scroll" direction="left" scrollamount="6">
-            🎉 Kale Fotokopi Yeni Eğitim Döneminde Yanınızda! • 🚚 Sistem Üzerinden Verilen 400 TL ve Üzeri Siparişlerinizde Ücretsiz Teslimat! • 🔥 En Güncel 2026 KPSS Kitapları Kataloğa Eklendi!
+            🎉 Kale Fotokopi Yeni Eğitim Döneminde Yanınızda! • 🚚 Minimum Sipariş 200 ₺'dir! • 📦 99 ₺ Hizmet Bedeli (2000 ₺ ve Üzeri Ücretsiz!) • 🔥 En Güncel 2026 KPSS Kitapları Kataloğa Eklendi!
         </marquee>
     </div>
 
@@ -425,7 +425,8 @@
             <h5 class="center-align"><i class="material-icons" style="vertical-align: bottom; font-size:2.2rem;">info</i> GENEL BİLGİLENDİRME</h5>
             <div class="divider" style="margin-bottom:20px;"></div>
             <ol>
-                <li>Sistem üzerinden verilecek siparişlerde <strong>minimum tutar 400 ₺</strong>'dir.</li>
+                <li>Sistem üzerinden verilecek siparişlerde <strong>minimum tutar 200 ₺</strong>'dir.</li>
+                <li>Siparişlerinize <strong>99 ₺ hizmet bedeli</strong> eklenmektedir. <strong>2000 ₺ ve üzeri</strong> siparişlerinizde hizmet bedeli alınmamaktadır.</li>
                 <li>Kitapların fiyatları sayfada <strong>ikili zımbalı</strong> fiyatlarıdır.</li>
                 <li>İsteğe göre <strong>spiral</strong> yapılır. Spiral ücretimiz <strong>20 ₺</strong>'dir.</li>
                 <li>İsteğe göre tamboy <strong>dikey</strong> çıkarılabilir, o zaman fiyat liste fiyatının <strong>iki katı</strong> olacaktır.</li>
@@ -448,7 +449,9 @@
                 <p class="grey-text">Sepetiniz şu an boş.</p>
             </div>
             <div class="divider" style="margin: 20px 0; border-color:var(--border-color);"></div>
-            <h4 class="right-align green-text text-darken-2" style="font-weight: bold; margin-top: 10px;">Toplam: <span id="cart-total">0.00</span> ₺</h4>
+            <h6 class="right-align grey-text text-darken-2" style="font-weight: 500; margin-top: 10px; font-size:1.1rem;">Ara Toplam: <span id="cart-subtotal">0.00</span> ₺</h6>
+            <h6 class="right-align orange-text text-darken-3" style="font-weight: 500; margin-top: 5px; font-size:1.1rem;">Hizmet Bedeli: <span id="cart-service-fee">0.00</span> ₺</h6>
+            <h4 class="right-align green-text text-darken-2" style="font-weight: bold; margin-top: 10px;">Genel Toplam: <span id="cart-total">0.00</span> ₺</h4>
             <div id="min-order-warning" class="red-text right-align" style="display:none; font-weight:bold; font-size:1.1rem; margin-top:5px;"></div>
         </div>
         <div class="modal-footer" style="padding: 0 24px 24px 24px;">
@@ -544,7 +547,6 @@
             
             checkTheme();
             
-            // Güvenli (Hata Yakalayıcı) Hafıza Yüklemeleri
             try { loadCartFromMemory(); } catch(e){}
             try { loadFavsFromMemory(); } catch(e){}
             try { loadPlanner(); } catch(e){}
@@ -555,7 +557,6 @@
             updateAllTimers(); 
         });
 
-        // SEKME SİSTEMİ
         function switchTab(tabId) {
             document.querySelectorAll('.app-section').forEach(sec => sec.classList.remove('active'));
             document.querySelectorAll('.bottom-nav-item').forEach(nav => nav.classList.remove('active'));
@@ -570,7 +571,6 @@
             window.scrollTo(0,0);
         }
 
-        // FAVORİLERİM
         function loadFavsFromMemory() {
             let f = localStorage.getItem('kalefotokopi_favs');
             if(f) { favorites = JSON.parse(f); }
@@ -638,7 +638,6 @@
             M.FormSelect.init(document.querySelectorAll('#favorites-list select:not(.browser-default)'));
         }
 
-        // POMODORO SAYACI
         let pomodoroInterval;
         let pomodoroTime = 25 * 60; 
         let isPomodoroRunning = false;
@@ -680,7 +679,6 @@
             document.getElementById('pomodoro-circle').style.borderColor = "var(--primary)";
         }
 
-        // HAFTALIK ÇALIŞMA PROGRAMI
         function savePlanner() {
             let plan = {};
             for(let i=1; i<=7; i++) { plan[i] = document.getElementById(`plan-${i}`).value; }
@@ -704,7 +702,6 @@
             }
         }
 
-        // SAYAÇLAR
         const examDates = {
             lisans: new Date("September 6, 2026 10:15:00").getTime(),
             onlisans: new Date("October 4, 2026 10:15:00").getTime(),
@@ -727,7 +724,6 @@
             document.getElementById(`${prefix}-s`).innerText = Math.floor((dist % 60000) / 1000).toString().padStart(2, '0');
         }
 
-        // TEMA
         function checkTheme() {
             if(localStorage.getItem('kalefotokopi_theme') === 'dark') {
                 document.body.classList.add('dark-mode');
@@ -744,7 +740,6 @@
             M.FormSelect.init(document.querySelectorAll('select:not(.browser-default)'));
         }
 
-        // GÜVENLİ CSV YÜKLEME 
         function loadCatalog() {
             Papa.parse("katalog.csv?v=" + new Date().getTime(), {
                 download: true, header: true, skipEmptyLines: true,
@@ -775,7 +770,6 @@
             });
         }
 
-        // FİLTRELER VE ARAMA
         function generateFilters() {
             const cats = new Set(); const brands = new Set();
             allProducts.forEach(p => {
@@ -943,6 +937,8 @@
             
             if(count === 0) {
                 document.getElementById('cart-items').innerHTML = '<p class="grey-text" style="font-size:1.1rem;"><i class="material-icons left">remove_shopping_cart</i> Sepetiniz şu an boş.</p>';
+                if(document.getElementById('cart-subtotal')) document.getElementById('cart-subtotal').innerText = '0.00';
+                if(document.getElementById('cart-service-fee')) document.getElementById('cart-service-fee').innerText = '0.00';
                 document.getElementById('cart-total').innerText = '0.00';
                 document.getElementById('min-order-warning').style.display = 'none'; return;
             }
@@ -962,11 +958,17 @@
                     </div>
                 </div>`;
             });
+
+            let serviceFee = (grandTotal > 0 && grandTotal < 2000) ? 99 : 0;
+            let finalTotal = grandTotal + serviceFee;
+
             document.getElementById('cart-items').innerHTML = html;
-            document.getElementById('cart-total').innerText = grandTotal.toFixed(2);
+            if(document.getElementById('cart-subtotal')) document.getElementById('cart-subtotal').innerText = grandTotal.toFixed(2);
+            if(document.getElementById('cart-service-fee')) document.getElementById('cart-service-fee').innerText = serviceFee > 0 ? serviceFee.toFixed(2) : '0.00 (Ücretsiz)';
+            document.getElementById('cart-total').innerText = finalTotal.toFixed(2);
             
             const warn = document.getElementById('min-order-warning');
-            if (grandTotal < 400) { warn.style.display = 'block'; warn.innerHTML = `<i class="material-icons left">error_outline</i> Sipariş için <b>${(400 - grandTotal).toFixed(2)} ₺</b> daha eklemelisiniz.`; } 
+            if (grandTotal < 200) { warn.style.display = 'block'; warn.innerHTML = `<i class="material-icons left">error_outline</i> Sipariş için <b>${(200 - grandTotal).toFixed(2)} ₺</b> daha eklemelisiniz.`; } 
             else { warn.style.display = 'none'; }
         }
 
@@ -975,11 +977,14 @@
         function sendOrder(platform) {
             if(cart.length === 0) { M.toast({html: 'Sepetiniz boş!', classes: 'red rounded'}); return; }
             let total = 0; cart.forEach(i => total += i.toplamFiyat);
-            if(total < 400) { M.toast({html: '<i class="material-icons left">warning</i> Minimum sipariş 400 ₺ olmalıdır!', classes: 'red rounded', displayLength: 4000}); return; }
+            if(total < 200) { M.toast({html: '<i class="material-icons left">warning</i> Minimum sipariş 200 ₺ olmalıdır!', classes: 'red rounded', displayLength: 4000}); return; }
+
+            let serviceFee = (total < 2000) ? 99 : 0;
+            let finalTotal = total + serviceFee;
 
             let message = "Merhaba Kale Fotokopi, yeni bir sipariş vermek istiyorum:%0A%0A";
             cart.forEach((i, idx) => { message += `*${idx+1}. [${i.kod || '-'}] ${i.ad}*%0A   - ${i.adet} Adet, ${i.tip}, ${i.cilt}%0A   - Tutar: ${i.toplamFiyat.toFixed(2)} TL%0A%0A`; });
-            message += `------------------------%0A*Genel Toplam: ${total.toFixed(2)} TL*`;
+            message += `------------------------%0A*Ara Toplam: ${total.toFixed(2)} TL*%0A*Hizmet Bedeli: ${serviceFee.toFixed(2)} TL*%0A*Genel Toplam: ${finalTotal.toFixed(2)} TL*`;
 
             window.open(`https://${platform==='whatsapp'?'wa.me/'+WHATSAPP_NUMBER:'t.me/'+TELEGRAM_USERNAME}?text=${message}`, '_blank');
             cart = []; saveCartToMemory(); updateCartUI(); M.Modal.getInstance(document.getElementById('cart-modal')).close();
@@ -992,7 +997,6 @@
             document.getElementById('requested-book-name').value = ''; M.Modal.getInstance(document.getElementById('request-modal')).close();
         }
 
-        // ADMIN PANELİ
         function checkAdminPassword() {
             if(prompt("Yönetici Şifrenizi Girin:") === ADMIN_PASSWORD) {
                 document.getElementById('adminSearchInput').value = ''; filterAdminTable(); M.Modal.getInstance(document.getElementById('admin-modal')).open();
