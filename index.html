@@ -428,7 +428,7 @@
                 <li>Sistem üzerinden verilecek siparişlerde <strong>minimum tutar 200 ₺</strong>'dir.</li>
                 <li>Siparişlerinize <strong>99 ₺ hizmet bedeli</strong> eklenmektedir. <strong>2000 ₺ ve üzeri</strong> siparişlerinizde hizmet bedeli alınmamaktadır.</li>
                 <li>Kitapların fiyatları sayfada <strong>ikili zımbalı</strong> fiyatlarıdır.</li>
-                <li>İsteğe göre <strong>spiral</strong> yapılır. Spiral ücretimiz <strong>20 ₺</strong>'dir.</li>
+                <li>İsteğe göre <strong>spiral</strong> yapılır. Spiral ücretimiz <strong>25 ₺</strong>'dir.</li>
                 <li>İsteğe göre tamboy <strong>dikey</strong> çıkarılabilir, o zaman fiyat liste fiyatının <strong>iki katı</strong> olacaktır.</li>
                 <li>Yanlış yazılan kodlar bizim sorumluluğumuzda değildir.</li>
                 <li>Aksi halde silik baskı, yanlış kitap vs. durumlarda <strong>iademiz mevcuttur</strong>.</li>
@@ -626,7 +626,7 @@
                             <div class="price-tag" id="fav-price-${realIndex}">${basePrice.toFixed(2)} ₺</div>
                             <div class="row" style="margin-bottom: 0;">
                                 <div class="input-field col s6"><select id="type-${realIndex}" onchange="updateDisplayPrice(${realIndex}, 'fav')"><option value="yatay">Yatay</option><option value="dikey">Dikey(x2)</option></select></div>
-                                <div class="input-field col s6"><select id="binding-${realIndex}" onchange="updateDisplayPrice(${realIndex}, 'fav')"><option value="zımba">Zımba</option><option value="spiral">Spiral(+20)</option></select></div>
+                                <div class="input-field col s6"><select id="binding-${realIndex}" onchange="updateDisplayPrice(${realIndex}, 'fav')"><option value="zımba">Zımba</option><option value="spiral">Spiral(+25)</option></select></div>
                             </div>
                             <div class="input-field"><input type="number" id="qty-${realIndex}" value="1" min="1" onchange="updateDisplayPrice(${realIndex}, 'fav')"><label class="active">Adet</label></div>
                             <button class="btn add-to-cart-btn" onclick="addToCart(${realIndex})">SEPETE EKLE</button>
@@ -799,11 +799,12 @@
             const sortVal = document.getElementById('sortSelect').value;
 
             let filtered = allProducts.filter(p => {
+                const hasImage = p.kapak && p.kapak.trim() !== '';
                 const text = ((p.ad||'') + (p.marka||'') + (p.kategori||'') + (p['kod adı']||'')).toLocaleLowerCase('tr-TR');
                 const mSearch = text.includes(query);
                 const mCat = currentFilter.kategori === '' || p.kategori === currentFilter.kategori;
                 const mBrand = currentFilter.marka === '' || p.marka === currentFilter.marka;
-                return mSearch && mCat && mBrand;
+                return hasImage && mSearch && mCat && mBrand;
             });
 
             if (sortVal === 'priceAsc') filtered.sort((a, b) => parsePrice(a.fiyat) - parsePrice(b.fiyat));
@@ -864,7 +865,7 @@
                                 </div>
                                 <div class="input-field col s6">
                                     <select id="binding-${realIndex}" onchange="updateDisplayPrice(${realIndex})">
-                                        <option value="zımba" selected>İkili Zımba</option><option value="spiral">Spiral (+20₺)</option>
+                                        <option value="zımba" selected>İkili Zımba</option><option value="spiral">Spiral (+25₺)</option>
                                     </select>
                                     <label>Cilt Tipi</label>
                                 </div>
@@ -893,7 +894,7 @@
             const product = allProducts[index];
             let price = parsePrice(product.fiyat);
             if (document.getElementById(`type-${index}`).value === 'dikey') price *= 2;
-            if (document.getElementById(`binding-${index}`).value === 'spiral') price += 20;
+            if (document.getElementById(`binding-${index}`).value === 'spiral') price += 25;
             
             let qty = parseInt(document.getElementById(`qty-${index}`).value) || 1;
             let targetId = prefix === 'fav' ? `fav-price-${index}` : `price-display-${index}`;
@@ -920,7 +921,7 @@
             
             let unitPrice = parsePrice(product.fiyat);
             if (type === 'dikey') unitPrice *= 2;
-            if (bind === 'spiral') unitPrice += 20;
+            if (bind === 'spiral') unitPrice += 25;
 
             cart.push({ kod: product['kod adı'], ad: product.ad, tip: type==='dikey'?'Dikey':'Yatay', cilt: bind==='spiral'?'Spiral':'Zımba', adet: qty, toplamFiyat: unitPrice * qty });
             saveCartToMemory(); updateCartUI();
