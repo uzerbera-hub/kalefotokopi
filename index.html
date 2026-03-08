@@ -168,7 +168,7 @@
 
     <div class="announcement-bar">
         <marquee behavior="scroll" direction="left" scrollamount="6">
-            🎉 Kale Fotokopi Yeni Eğitim Döneminde Yanınızda! • 🚚 Minimum Sipariş 200 ₺'dir! • 📦 99 ₺ Hizmet Bedeli (2000 ₺ ve Üzeri Ücretsiz!) • 🔥 En Güncel 2026 KPSS Kitapları Kataloğa Eklendi!
+            🎉 Kale Fotokopi Yeni Eğitim Döneminde Yanınızda! • 📲 Instagram'dan bizi takip edin: @kalefotokopi • 🚚 Minimum Sipariş 200 ₺'dir! • 📦 99 ₺ Hizmet Bedeli (2000 ₺ ve Üzeri Ücretsiz!) • 🔥 En Güncel 2026 KPSS Kitapları Kataloğa Eklendi!
         </marquee>
     </div>
 
@@ -398,6 +398,7 @@
                         <li><i class="material-icons">phone</i> 0531 379 35 27</li>
                         <li><i class="material-icons">chat</i> WhatsApp Canlı Destek</li>
                         <li><i class="material-icons">location_on</i> Çanakkale Merkez</li>
+                        <li><a href="https://instagram.com/kalefotokopi" target="_blank" class="white-text" style="color: inherit;"><i class="material-icons">photo_camera</i> Instagram: @kalefotokopi</a></li>
                         <li style="margin-top: 20px;">
                             <img src="https://profile-counter.glitch.me/kalefotokopi_sayac/count.svg" alt="Ziyaretçi Sayacı">
                         </li>
@@ -523,7 +524,7 @@
 
     <script>
         const WHATSAPP_NUMBER = "905313793527"; 
-        const TELEGRAM_USERNAME = "kullaniciadiniz"; 
+        const TELEGRAM_USERNAME = "kalefotokopi"; // Güncellendi
         const ADMIN_PASSWORD = "1234"; 
         const NO_IMAGE_URL = `data:image/svg+xml;charset=UTF-8,` + encodeURIComponent(`<svg width="400" height="550" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="550" fill="#eeeeee"/><text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#ff9800">GÖRSEL</text><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="bold" fill="#757575">HAZIRLANIYOR</text></svg>`);
 
@@ -771,7 +772,9 @@
         }
 
         function generateFilters() {
-            const cats = new Set(); const brands = new Set();
+            // Ders isimleri buraya eklendi, CSV'den bağımsız olarak butonlar hazır duracak
+            const cats = new Set(["Türkçe", "Matematik", "Tarih", "Coğrafya", "Vatandaşlık"]); 
+            const brands = new Set();
             allProducts.forEach(p => {
                 if(p.kategori && p.kategori.trim() !== '') cats.add(p.kategori.trim());
                 if(p.marka && p.marka.trim() !== '') brands.add(p.marka.trim());
